@@ -1,5 +1,6 @@
 package com.vet.vetgroup.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.boot.context.properties.bind.DefaultValue;
