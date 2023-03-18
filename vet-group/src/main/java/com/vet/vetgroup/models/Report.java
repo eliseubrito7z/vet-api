@@ -30,6 +30,14 @@ public class Report implements Serializable {
     @Column(nullable = true, unique = false)
     private Boolean approved;
 
+    @ManyToOne
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
+    private Staff createdBy;
+
+    @ManyToOne
+    @JoinColumn(name = "approver", referencedColumnName = "id")
+    private Staff approver;
+
     public Long getId() {
         return id;
     }
