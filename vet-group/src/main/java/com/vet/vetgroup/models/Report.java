@@ -30,6 +30,14 @@ public class Report implements Serializable {
     @Column(nullable = true, unique = false)
     private Boolean approved;
 
+    @ManyToOne
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
+    private Staff createdBy;
+
+    @ManyToOne
+    @JoinColumn(name = "approver", referencedColumnName = "id")
+    private Staff approver;
+
     public Long getId() {
         return id;
     }
@@ -84,6 +92,22 @@ public class Report implements Serializable {
 
     public void setApproved(Boolean approved) {
         this.approved = approved;
+    }
+
+    public Staff getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Staff createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Staff getApprover() {
+        return approver;
+    }
+
+    public void setApprover(Staff approver) {
+        this.approver = approver;
     }
 
     @Override
