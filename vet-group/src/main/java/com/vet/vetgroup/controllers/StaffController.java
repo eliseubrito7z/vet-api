@@ -36,7 +36,7 @@ public class StaffController {
             @RequestParam Boolean onDuty,
             @RequestHeader(HttpHeaders.AUTHORIZATION) String token
     ) {
-//        Staff staff = service.findById();
+        Staff staff = service.findByToken(token);
         return ResponseEntity.ok().build();
     }
 
