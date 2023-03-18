@@ -1,9 +1,12 @@
 package com.vet.vetgroup.controllers;
 
+import com.vet.vetgroup.dtos.creation.RoleHistoricCreationDto;
 import com.vet.vetgroup.dtos.creation.StaffCreationDto;
+import com.vet.vetgroup.dtos.response.StaffResponseDto;
 import com.vet.vetgroup.models.Staff;
 import com.vet.vetgroup.services.StaffService;
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -28,7 +31,7 @@ public class StaffController {
         return ResponseEntity.ok().body(service.insert(dto));
     }
 
-    @PatchMapping(value = "/onDuty")
+    @PatchMapping(value = "/on-duty")
     public ResponseEntity<Void> updateOnDuty(
             @RequestParam Boolean onDuty,
             @RequestHeader(HttpHeaders.AUTHORIZATION) String token
@@ -37,6 +40,14 @@ public class StaffController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping(value = "update-role")
+    public ResponseEntity<Staff> updateRole(
+            @RequestBody @Valid RoleHistoricCreationDto roleHistoricDto,
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String token
+    ) {
+        Staff staff = service.updateRole(token, roleHistoricDto);
+        return ResponseEntity.ok().body(staff);
+    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Staff>> findAll() {

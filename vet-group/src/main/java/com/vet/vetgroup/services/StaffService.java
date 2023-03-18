@@ -1,6 +1,9 @@
 package com.vet.vetgroup.services;
 
+import com.vet.vetgroup.dtos.creation.RoleHistoricCreationDto;
 import com.vet.vetgroup.dtos.creation.StaffCreationDto;
+import com.vet.vetgroup.models.Role;
+import com.vet.vetgroup.models.RoleHistoric;
 import com.vet.vetgroup.models.Staff;
 import com.vet.vetgroup.repositories.StaffRepository;
 import org.springframework.beans.BeanUtils;
@@ -17,12 +20,26 @@ public class StaffService {
     @Autowired
     private StaffRepository repository;
 
+    @Autowired
+    private RoleHistoricService roleHistoricService;
+
+    @Autowired
+    private RoleService roleService;
+
     public List<Staff> findAll() {
         return repository.findAll();
     }
 
     public Staff findById(Long id) {
         Optional<Staff> staff = repository.findById(id);
+
+        if(staff.isEmpty()) throw new IllegalArgumentException("This Staff not exists");
+
+        return staff.get();
+    }
+
+    public Staff findByEmail(String email) {
+        Optional<Staff> staff = Optional.ofNullable(repository.findByEmail(email));
 
         if(staff.isEmpty()) throw new IllegalArgumentException("This Staff not exists");
 
@@ -37,7 +54,37 @@ public class StaffService {
         return staffModel.getId();
     }
 
+    public Staff findByToken(String tokenUnformatted) {
+        String tokenFormatted = tokenUnformatted.substring("Bearer ".length());
+        String staffEmail = "teste";
+        Staff staff = findByEmail(staffEmail);
+
+        // TODO: get user email extracting subject of token using jwtProvider
+        return staff;
+    }
+
+    public Staff updateRole(String tokenUnformatted, RoleHistoricCreationDto roleDto) {
+        Staff staff = findById(roleDto.getStaff_id());
+        Staff promotedBy = findByToken(tokenUnformatted);
+        Role role = roleService.findByDescription(roleDto.getRoleDescription());
+
+        RoleHistoric roleHistoric = new RoleHistoric();
+        BeanUtils.copyProperties(roleDto, roleHistoric);
+
+        roleHistoric.setRole(role);
+        roleHistoric.setStaff(staff);
+        roleHistoric.setPromoter(promotedBy);
+
+        roleHistoricService.insert(roleHistoric);
+        update(staff);
+        return staff;
+        //OBS: Returning staff to update instantly on cache of FE.
+    }
+
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+    public void update(Staff staff) {
+        repository.save(staff);
     }
 }
