@@ -1,10 +1,15 @@
 package com.vet.vetgroup.services;
 
+import com.vet.vetgroup.dtos.creation.PatientCreationDto;
+import com.vet.vetgroup.dtos.creation.StaffCreationDto;
 import com.vet.vetgroup.models.Patient;
+import com.vet.vetgroup.models.Staff;
 import com.vet.vetgroup.repositories.PatientRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +29,14 @@ public class PatientService {
         if(patient.isEmpty()) throw new IllegalArgumentException("This Patient not exists");
 
         return patient.get();
+    }
+
+    public Long insert(PatientCreationDto dto) {
+        Patient patientModel = new Patient();
+        BeanUtils.copyProperties(dto, patientModel);
+        patientModel.setCreatedAt(new Date());
+        repository.save(patientModel);
+        return patientModel.getId();
     }
 
     public void deleteById(Long id) {
