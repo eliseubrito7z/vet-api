@@ -18,16 +18,24 @@ public class RoleService {
     @Autowired
     private RoleRepository repository;
 
-    public List<com.vet.vetgroup.models.Role> findAll() {
+    public List<Role> findAll() {
         return repository.findAll();
     }
 
-    public com.vet.vetgroup.models.Role findById(Long id) {
-        Optional<com.vet.vetgroup.models.Role> patient = repository.findById(id);
+    public Role findById(Long id) {
+        Optional<Role> role = repository.findById(id);
 
-        if(patient.isEmpty()) throw new IllegalArgumentException("This Role not exists");
+        if(role.isEmpty()) throw new IllegalArgumentException("This Role not exists");
 
-        return patient.get();
+        return role.get();
+    }
+
+    public Role findByDescription(String description) {
+        Optional<Role> role = Optional.ofNullable(repository.findByDescription(description));
+
+        if(role.isEmpty()) throw new IllegalArgumentException("This Role not exists");
+
+        return role.get();
     }
 
     public Role insert(Role role) {
