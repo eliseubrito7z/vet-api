@@ -1,9 +1,14 @@
 package com.vet.vetgroup.services;
 
+import com.vet.vetgroup.dtos.creation.ReportCreationDto;
+import com.vet.vetgroup.dtos.creation.ServiceCreationDto;
+import com.vet.vetgroup.models.Report;
 import com.vet.vetgroup.models.Service;
 import com.vet.vetgroup.repositories.ServiceRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +29,15 @@ public class ServiceService {
 
         return patient.get();
     }
+
+    public Long insert(ServiceCreationDto dto) {
+        Service serviceModel = new Service();
+        BeanUtils.copyProperties(dto, serviceModel);
+        serviceModel.setCreatedAt(new Date());
+        repository.save(serviceModel);
+        return serviceModel.getId();
+    }
+
 
     public void deleteById(Long id) {
         repository.deleteById(id);
