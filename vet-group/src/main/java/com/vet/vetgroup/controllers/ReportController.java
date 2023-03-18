@@ -3,8 +3,10 @@ package com.vet.vetgroup.controllers;
 import com.vet.vetgroup.dtos.creation.ReportCreationDto;
 import com.vet.vetgroup.models.Report;
 import com.vet.vetgroup.services.ReportService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,16 @@ public class ReportController {
     @PostMapping(value = "/create")
     public ResponseEntity<Long> create(@RequestBody @Valid ReportCreationDto dto) {
         return ResponseEntity.ok().body(service.insert(dto));
+    }
+
+    @PatchMapping(value = "/{id}", params = "approved", consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Report> updateApproved(
+            @PathVariable Long id,
+            @RequestParam(value = "approved", required = true) Boolean approved,
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String token
+    ) {
+        Report report = service.updateApproved(token, approved, id);
+        return ResponseEntity.ok().body(report);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
