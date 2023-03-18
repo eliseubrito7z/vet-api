@@ -1,7 +1,9 @@
 package com.vet.vetgroup.controllers;
 
+import com.vet.vetgroup.dtos.creation.ServiceCreationDto;
 import com.vet.vetgroup.models.Service;
 import com.vet.vetgroup.services.ServiceService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +18,11 @@ public class ServiceController {
 
     @Autowired
     private ServiceService service;
+
+    @PostMapping(value = "/create")
+    public ResponseEntity<Long> create(@RequestBody @Valid ServiceCreationDto dto) {
+        return ResponseEntity.ok().body(service.insert(dto));
+    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Service>> findAll() {
