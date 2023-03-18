@@ -49,6 +49,13 @@ public class StaffController {
         return ResponseEntity.ok().body(staff);
     }
 
+
+    @GetMapping(value = "/me")
+    public ResponseEntity<Staff> findByToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
+        Staff staff = service.findByToken(token);
+        return ResponseEntity.ok().body(staff);
+    }
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Staff>> findAll() {
         List<Staff> list = service.findAll();
