@@ -35,6 +35,15 @@ public class Service implements Serializable {
     @Column(nullable = false, updatable = false)
     private Integer price;
 
+    @ManyToOne
+    @JoinColumn(name = "medic_id", referencedColumnName = "id")
+    private Staff medic;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_id", referencedColumnName = "id")
+    private Patient patient;
+
+
     public Long getId() {
         return id;
     }
@@ -111,6 +120,22 @@ public class Service implements Serializable {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public Staff getMedic() {
+        return medic;
+    }
+
+    public void setMedic(Staff medic) {
+        this.medic = medic;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     @Override
