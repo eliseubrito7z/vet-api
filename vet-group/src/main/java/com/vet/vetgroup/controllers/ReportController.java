@@ -22,8 +22,11 @@ public class ReportController {
     private ReportService service;
 
     @PostMapping(value = "/create")
-    public ResponseEntity<Long> create(@RequestBody @Valid ReportCreationDto dto) {
-        return ResponseEntity.ok().body(service.insert(dto));
+    public ResponseEntity<Long> create(
+            @RequestBody @Valid ReportCreationDto dto,
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String token
+    ) {
+        return ResponseEntity.ok().body(service.insert(dto, token));
     }
 
     @PatchMapping(value = "/{id}", params = "approved", consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

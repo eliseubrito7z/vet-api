@@ -35,10 +35,13 @@ public class ReportService {
         return report.get();
     }
 
-    public Long insert(ReportCreationDto dto) {
+    public Long insert(ReportCreationDto dto, String token) {
         Report reportModel = new Report();
+        Staff createdBy = staffService.findByToken(token);
         BeanUtils.copyProperties(dto, reportModel);
-        reportModel.setCreatedAt(new Date());
+
+        reportModel.setCreatedBy(createdBy);
+
         repository.save(reportModel);
         return reportModel.getId();
     }
