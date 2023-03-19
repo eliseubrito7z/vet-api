@@ -5,6 +5,8 @@ import com.vet.vetgroup.dtos.creation.ServiceCreationDto;
 import com.vet.vetgroup.enums.PaymentStatus;
 import com.vet.vetgroup.enums.ServiceStatus;
 import com.vet.vetgroup.enums.ServiceTypes;
+import com.vet.vetgroup.models.City;
+import com.vet.vetgroup.models.Patient;
 import com.vet.vetgroup.models.Service;
 import com.vet.vetgroup.models.Staff;
 import com.vet.vetgroup.repositories.ServiceRepository;
@@ -24,6 +26,12 @@ public class ServiceService {
     @Autowired
     private StaffService staffService;
 
+    @Autowired
+    private PatientService patientService;
+
+    @Autowired
+    private CityService cityService;
+
     public List<Service> findAll() {
         return repository.findAll();
     }
@@ -38,11 +46,21 @@ public class ServiceService {
 
     public Long insert(ServiceCreationDto dto) {
         Service serviceModel = new Service();
+        Staff medic = staffService.findById(dto.getMedicId());
+        Patient patient = patientService.findById(dto.getPatientId());
+        City city = cityService.findById(dto.getCityId());
         BeanUtils.copyProperties(dto, serviceModel);
 
         if (serviceModel.getStatus() != ServiceStatus.SCHEDULED) {
             serviceModel.setServiceDate(new Date());
         }
+
+        serviceModel.setType(dto.getType());
+        serviceModel.setPaymentStatus(dto.getPaymentStatus());
+        serviceModel.setStatus(dto.getStatus());
+        serviceModel.setMedic(medic);
+        serviceModel.setPatient(patient);
+        serviceModel.setCity(city);
 
         repository.save(serviceModel);
         return serviceModel.getId();
