@@ -4,8 +4,8 @@ public enum PaymentStatus {
 
     WAITING_PAYMENT(1),
     PAID(2),
-    CANCELED(4),
-    COMPLETED(5);
+    COMPLETED(3),
+    CANCELED(4);
 
     private int code;
 

@@ -2,8 +2,11 @@ package com.vet.vetgroup.services;
 
 
 import com.vet.vetgroup.dtos.creation.ServiceCreationDto;
+import com.vet.vetgroup.enums.PaymentStatus;
 import com.vet.vetgroup.enums.ServiceStatus;
+import com.vet.vetgroup.enums.ServiceTypes;
 import com.vet.vetgroup.models.Service;
+import com.vet.vetgroup.models.Staff;
 import com.vet.vetgroup.repositories.ServiceRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,9 @@ public class ServiceService {
 
     @Autowired
     private ServiceRepository repository;
+
+    @Autowired
+    private StaffService staffService;
 
     public List<Service> findAll() {
         return repository.findAll();
@@ -40,6 +46,39 @@ public class ServiceService {
 
         repository.save(serviceModel);
         return serviceModel.getId();
+    }
+
+    public Service updateStatus(String token, ServiceStatus status, Long id) {
+        Service service = findById(id);
+        Staff staff = staffService.findByToken(token);
+
+        if (service.getMedic().getId() != staff.getId()) {
+            throw new IllegalArgumentException("You don't have permission to alter this document");
+        }
+
+        service.setStatus(status);
+        update(service);
+        return service;
+    }
+
+    public Service updatePaymentStatus(String token, PaymentStatus status, Long id) {
+        Service service = findById(id);
+
+        if (service.getPaymentStatus() == PaymentStatus.CANCELED) {
+            throw new IllegalArgumentException("This Service was canceled!");
+        }
+
+        if (service.getPaymentStatus() == status) {
+            throw new IllegalArgumentException("This services is already with payment status "+status);
+        }
+
+        service.setPaymentStatus(status);
+        update(service);
+        return service;
+    }
+
+    public void update(Service service) {
+        repository.save(service);
     }
 
 

@@ -5,7 +5,8 @@ public enum ServiceStatus {
     SCHEDULED(1),
     NOT_INITIALIZED(2),
     IN_PROGRESS(4),
-    COMPLETED(5);
+    COMPLETED(5),
+    CANCELED(6);
 
     private int code;
 

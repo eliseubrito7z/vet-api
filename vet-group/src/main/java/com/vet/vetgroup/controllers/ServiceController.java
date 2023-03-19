@@ -1,10 +1,13 @@
 package com.vet.vetgroup.controllers;
 
 import com.vet.vetgroup.dtos.creation.ServiceCreationDto;
+import com.vet.vetgroup.enums.PaymentStatus;
+import com.vet.vetgroup.enums.ServiceStatus;
 import com.vet.vetgroup.models.Service;
 import com.vet.vetgroup.services.ServiceService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,27 @@ public class ServiceController {
     public ResponseEntity<Long> create(@RequestBody @Valid ServiceCreationDto dto) {
         return ResponseEntity.ok().body(service.insert(dto));
     }
+
+    @PatchMapping(value = "/{id}/update")
+    public ResponseEntity<Service> updateStatus(
+            @PathVariable Long id,
+            @RequestParam(name = "status", required = true) ServiceStatus status,
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String token
+    ) {
+        Service serviceModel = service.updateStatus(token, status, id);
+        return ResponseEntity.ok().body(serviceModel);
+    }
+
+    @PatchMapping(value = "/{id}/update")
+    public ResponseEntity<Service> updatePaymentStatus(
+            @PathVariable Long id,
+            @RequestParam(name = "payment-status", required = true) PaymentStatus status,
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String token
+    ) {
+        Service serviceModel = service.updatePaymentStatus(token, status, id);
+        return ResponseEntity.ok().body(serviceModel);
+    }
+
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Service>> findAll() {
