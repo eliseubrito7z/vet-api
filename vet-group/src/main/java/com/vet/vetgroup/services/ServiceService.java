@@ -77,6 +77,19 @@ public class ServiceService {
         return service;
     }
 
+    public Service updateDescription(String token, String description, Long id) {
+         Service service = findById(id);
+         Staff staff = staffService.findByToken(token);
+
+         if (service.getMedic().getId() != staff.getId()) {
+             throw new IllegalArgumentException("You dont have permission to edit this document");
+         }
+
+         service.setDescription(description);
+         update(service);
+         return service;
+    }
+
     public void update(Service service) {
         repository.save(service);
     }

@@ -1,6 +1,7 @@
 package com.vet.vetgroup.controllers;
 
 import com.vet.vetgroup.dtos.creation.ServiceCreationDto;
+import com.vet.vetgroup.dtos.updates.UpdateDescription;
 import com.vet.vetgroup.enums.PaymentStatus;
 import com.vet.vetgroup.enums.ServiceStatus;
 import com.vet.vetgroup.models.Service;
@@ -47,6 +48,15 @@ public class ServiceController {
         return ResponseEntity.ok().body(serviceModel);
     }
 
+    @PutMapping(value = "/{id}/update-description")
+    public ResponseEntity<Service> updateDescription(
+            @PathVariable Long id,
+            @RequestBody UpdateDescription body,
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String token
+    ) {
+        Service serviceModel = service.updateDescription(token, body.getDescription(), id);
+        return ResponseEntity.ok().body(serviceModel);
+    }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Service>> findAll() {
