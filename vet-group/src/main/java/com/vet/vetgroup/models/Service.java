@@ -33,9 +33,12 @@ public class Service implements Serializable {
     @Column(name = "payment_status", nullable = false)
     private Integer paymentStatus;
     @Column(nullable = false, updatable = false)
-    private String city;
-    @Column(nullable = false, updatable = false)
     private Integer price;
+
+    @ManyToOne
+    @JoinColumn(name = "city", referencedColumnName = "id")
+    @Column(nullable = false, updatable = false)
+    private City city;
 
     @ManyToOne
     @JoinColumn(name = "medic_id", referencedColumnName = "id")
@@ -116,20 +119,20 @@ public class Service implements Serializable {
         }
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public Integer getPrice() {
         return price;
     }
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
     public Staff getMedic() {
