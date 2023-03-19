@@ -24,7 +24,7 @@ public class ServiceCreationDto {
     @NotNull
     private Long medicId;
     @NotNull
-    private Long cityId;
+    private String cityNameAndUF;
     @NotNull
     private Integer price;
 
@@ -84,12 +84,12 @@ public class ServiceCreationDto {
         this.medicId = medicId;
     }
 
-    public Long getCityId() {
-        return cityId;
+    public String getCityNameAndUF() {
+        return cityNameAndUF;
     }
 
-    public void setCityId(Long cityId) {
-        this.cityId = cityId;
+    public void setCityNameAndUF(String cityNameAndUF) {
+        this.cityNameAndUF = cityNameAndUF;
     }
 
     public Integer getPrice() {

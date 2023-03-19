@@ -48,7 +48,7 @@ public class ServiceService {
         Service serviceModel = new Service();
         Staff medic = staffService.findById(dto.getMedicId());
         Patient patient = patientService.findById(dto.getPatientId());
-        City city = cityService.findById(dto.getCityId());
+        City city = cityService.findByNameAndUF(dto.getCityNameAndUF());
         BeanUtils.copyProperties(dto, serviceModel);
 
         if (serviceModel.getStatus() != ServiceStatus.SCHEDULED) {
