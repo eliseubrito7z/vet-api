@@ -30,7 +30,7 @@ public class Service implements Serializable {
     private Integer type;
     @Column(nullable = false, updatable = false)
     private Integer status;
-    @Column(name = "payment_status", nullable = false, updatable = false)
+    @Column(name = "payment_status", nullable = false)
     private Integer paymentStatus;
     @Column(nullable = false, updatable = false)
     private String city;
