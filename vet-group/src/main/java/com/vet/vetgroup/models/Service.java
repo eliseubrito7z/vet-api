@@ -22,6 +22,8 @@ public class Service implements Serializable {
     private Date createdAt;
     @Column(nullable = false, updatable = false)
     private String reason;
+    @Column(nullable = true, updatable = false)
+    private String description;
     @Column(name = "service_date", nullable = false, updatable = false)
     private Date serviceDate;
     @Column(nullable = false, updatable = false)
@@ -66,6 +68,14 @@ public class Service implements Serializable {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getServiceDate() {
