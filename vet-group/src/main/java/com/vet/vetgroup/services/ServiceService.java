@@ -1,10 +1,8 @@
 package com.vet.vetgroup.services;
 
-import com.vet.vetgroup.dtos.creation.ReportCreationDto;
+
 import com.vet.vetgroup.dtos.creation.ServiceCreationDto;
 import com.vet.vetgroup.enums.ServiceStatus;
-import com.vet.vetgroup.enums.ServiceTypes;
-import com.vet.vetgroup.models.Report;
 import com.vet.vetgroup.models.Service;
 import com.vet.vetgroup.repositories.ServiceRepository;
 import org.springframework.beans.BeanUtils;
