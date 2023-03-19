@@ -1,5 +1,8 @@
 package com.vet.vetgroup.models;
 
+import com.vet.vetgroup.enums.PaymentStatus;
+import com.vet.vetgroup.enums.ServiceStatus;
+import com.vet.vetgroup.enums.ServiceTypes;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -22,11 +25,11 @@ public class Service implements Serializable {
     @Column(name = "service_date", nullable = false, updatable = false)
     private Date serviceDate;
     @Column(nullable = false, updatable = false)
-    private String type;
+    private Integer type;
     @Column(nullable = false, updatable = false)
-    private String status;
+    private Integer status;
     @Column(name = "payment_status", nullable = false, updatable = false)
-    private String paymentStatus;
+    private Integer paymentStatus;
     @Column(nullable = false, updatable = false)
     private String city;
     @Column(nullable = false, updatable = false)
@@ -64,28 +67,34 @@ public class Service implements Serializable {
         this.serviceDate = serviceDate;
     }
 
-    public String getType() {
-        return type;
+    public ServiceTypes getType() {
+        return ServiceTypes.valueOf(this.type);
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setType(ServiceTypes type) {
+        if (type != null) {
+            this.type = type.getCode();
+        }
     }
 
-    public String getStatus() {
-        return status;
+    public ServiceStatus getStatus() {
+        return ServiceStatus.valueOf(this.status);
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(ServiceStatus status) {
+        if (status != null) {
+            this.status = status.getCode();
+        }
     }
 
-    public String getPaymentStatus() {
-        return paymentStatus;
+    public PaymentStatus getPaymentStatus() {
+        return PaymentStatus.valueOf(this.paymentStatus);
     }
 
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
+        if (paymentStatus != null) {
+            this.paymentStatus = paymentStatus.getCode();
+        }
     }
 
     public String getCity() {
