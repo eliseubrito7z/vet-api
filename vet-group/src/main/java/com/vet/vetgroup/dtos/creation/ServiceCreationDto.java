@@ -1,5 +1,8 @@
 package com.vet.vetgroup.dtos.creation;
 
+import com.vet.vetgroup.enums.PaymentStatus;
+import com.vet.vetgroup.enums.ServiceStatus;
+import com.vet.vetgroup.enums.ServiceTypes;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
@@ -11,13 +14,17 @@ public class ServiceCreationDto {
     @NotNull
     private Date serviceDate;
     @NotNull
-    private String type;
+    private ServiceTypes type;
     @NotNull
-    private String status;
+    private ServiceStatus status;
     @NotNull
-    private String paymentStatus;
+    private PaymentStatus paymentStatus;
     @NotNull
-    private String city;
+    private Long patientId;
+    @NotNull
+    private Long medicId;
+    @NotNull
+    private Long cityId;
     @NotNull
     private Integer price;
 
@@ -37,36 +44,52 @@ public class ServiceCreationDto {
         this.serviceDate = serviceDate;
     }
 
-    public String getType() {
+    public ServiceTypes getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ServiceTypes type) {
         this.type = type;
     }
 
-    public String getStatus() {
+    public ServiceStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ServiceStatus status) {
         this.status = status;
     }
 
-    public String getPaymentStatus() {
+    public PaymentStatus getPaymentStatus() {
         return paymentStatus;
     }
 
-    public void setPaymentStatus(String paymentStatus) {
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
 
-    public String getCity() {
-        return city;
+    public Long getPatientId() {
+        return patientId;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setPatientId(Long patientId) {
+        this.patientId = patientId;
+    }
+
+    public Long getMedicId() {
+        return medicId;
+    }
+
+    public void setMedicId(Long medicId) {
+        this.medicId = medicId;
+    }
+
+    public Long getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
     }
 
     public Integer getPrice() {

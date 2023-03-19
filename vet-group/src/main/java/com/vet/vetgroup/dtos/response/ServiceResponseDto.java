@@ -1,5 +1,9 @@
 package com.vet.vetgroup.dtos.response;
 
+import com.vet.vetgroup.dtos.reduceds.PatientReducedDto;
+import com.vet.vetgroup.dtos.reduceds.StaffReducedDto;
+import com.vet.vetgroup.models.City;
+
 import java.util.Date;
 
 public class ServiceResponseDto {
@@ -11,7 +15,9 @@ public class ServiceResponseDto {
     private String type;
     private String status;
     private String paymentStatus;
-    private String city;
+    private City city;
+    private StaffReducedDto medic;
+    private PatientReducedDto patient;
     private Integer price;
 
     public Long getId() {
@@ -70,12 +76,28 @@ public class ServiceResponseDto {
         this.paymentStatus = paymentStatus;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
+    }
+
+    public StaffReducedDto getMedic() {
+        return medic;
+    }
+
+    public void setMedic(StaffReducedDto medic) {
+        this.medic = medic;
+    }
+
+    public PatientReducedDto getPatient() {
+        return patient;
+    }
+
+    public void setPatient(PatientReducedDto patient) {
+        this.patient = patient;
     }
 
     public Integer getPrice() {
