@@ -2,6 +2,8 @@ package com.vet.vetgroup.services;
 
 import com.vet.vetgroup.dtos.creation.ReportCreationDto;
 import com.vet.vetgroup.dtos.creation.ServiceCreationDto;
+import com.vet.vetgroup.enums.ServiceStatus;
+import com.vet.vetgroup.enums.ServiceTypes;
 import com.vet.vetgroup.models.Report;
 import com.vet.vetgroup.models.Service;
 import com.vet.vetgroup.repositories.ServiceRepository;
@@ -33,7 +35,11 @@ public class ServiceService {
     public Long insert(ServiceCreationDto dto) {
         Service serviceModel = new Service();
         BeanUtils.copyProperties(dto, serviceModel);
-        serviceModel.setCreatedAt(new Date());
+
+        if (serviceModel.getStatus() != ServiceStatus.SCHEDULED) {
+            serviceModel.setServiceDate(new Date());
+        }
+
         repository.save(serviceModel);
         return serviceModel.getId();
     }
