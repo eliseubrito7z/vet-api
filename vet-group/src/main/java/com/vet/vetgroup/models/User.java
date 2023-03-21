@@ -42,8 +42,8 @@ public class User implements UserDetails, Serializable {
     
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tb_user_role",
-            joinColumns = {@JoinColumn (name = "id_user")}, 
-            inverseJoinColumns = {@JoinColumn (name = "id_role")})
+            joinColumns = {@JoinColumn (name = "user_id")},
+            inverseJoinColumns = {@JoinColumn (name = "role_id")})
     private List<Role> roles;
 
     public User() {
