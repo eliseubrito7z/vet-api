@@ -13,9 +13,6 @@ public class Role implements Serializable {
     private Long id;
     private String description;
 
-    @ManyToMany(mappedBy = "roles")
-    private Collection<Staff> users;
-
     @ManyToMany
     @JoinTable(
             name = "roles_privileges",

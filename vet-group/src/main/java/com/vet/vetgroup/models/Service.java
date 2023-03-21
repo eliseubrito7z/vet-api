@@ -35,16 +35,15 @@ public class Service implements Serializable {
     @Column(nullable = false, updatable = false)
     private Integer price;
 
-    @ManyToOne
-    @JoinColumn(name = "city", referencedColumnName = "id")
-    @Column(nullable = false, updatable = false)
+    @OneToOne
+    @JoinColumn(name = "city_id")
     private City city;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "medic_id", referencedColumnName = "id")
     private Staff medic;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
     private Patient patient;
 

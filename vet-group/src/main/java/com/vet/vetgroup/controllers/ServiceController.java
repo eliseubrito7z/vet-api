@@ -28,7 +28,7 @@ public class ServiceController {
         return ResponseEntity.ok().body(service.insert(dto));
     }
 
-    @PatchMapping(value = "/{id}/update")
+    @PatchMapping(value = "/{id}/update-status")
     public ResponseEntity<Service> updateStatus(
             @PathVariable Long id,
             @RequestParam(name = "status", required = true) ServiceStatus status,
@@ -38,7 +38,7 @@ public class ServiceController {
         return ResponseEntity.ok().body(serviceModel);
     }
 
-    @PatchMapping(value = "/{id}/update")
+    @PatchMapping(value = "/{id}/update-payment")
     public ResponseEntity<Service> updatePaymentStatus(
             @PathVariable Long id,
             @RequestParam(name = "payment-status", required = true) PaymentStatus status,

@@ -27,7 +27,7 @@ public class CityService {
     }
 
     public City findByNameAndUF(String nameAndUF) {
-        return repository.findByNameAndUF(nameAndUF);
+        return repository.findByName(nameAndUF);
     }
 
     public City insert(City city) {

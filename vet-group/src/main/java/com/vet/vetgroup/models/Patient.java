@@ -34,6 +34,9 @@ public class Patient implements Serializable {
     @Column(nullable = false, updatable = false)
     private String sex;
 
+    @OneToOne(mappedBy = "patient")
+    private Service service;
+
     public Long getId() {
         return id;
     }

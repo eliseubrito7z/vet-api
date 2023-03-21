@@ -8,6 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -39,6 +40,14 @@ public class Staff implements Serializable {
     @Column(name = "work_load_completed", nullable = true)
     private Integer workLoadCompleted;
 
+    @OneToOne(mappedBy = "medic")
+    private Service service;
+
+    @OneToMany(mappedBy = "createdBy")
+    private List<Report> report;
+
+    @OneToMany(mappedBy = "approver")
+    private List<Report> reportApprover;
 
     public Long getId() {
         return id;

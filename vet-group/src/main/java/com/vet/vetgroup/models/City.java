@@ -14,7 +14,10 @@ public class City implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, updatable = false, unique = true)
-    public String nameAndUF;
+    public String name;
+
+    @OneToOne(mappedBy = "city")
+    private Service service;
 
     public Long getId() {
         return id;
@@ -24,12 +27,20 @@ public class City implements Serializable {
         this.id = id;
     }
 
-    public String getNameAndUF() {
-        return nameAndUF;
+    public String getName() {
+        return name;
     }
 
-    public void setNameAndUF(String nameAndUF) {
-        this.nameAndUF = nameAndUF;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
     }
 
     @Override
@@ -40,13 +51,13 @@ public class City implements Serializable {
         City city = (City) o;
 
         if (!Objects.equals(id, city.id)) return false;
-        return Objects.equals(nameAndUF, city.nameAndUF);
+        return Objects.equals(name, city.name);
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (nameAndUF != null ? nameAndUF.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
 }

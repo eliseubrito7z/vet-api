@@ -32,7 +32,6 @@ public class Report implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "created_by", referencedColumnName = "id")
-    @Column(nullable = false, updatable = false)
     private Staff createdBy;
 
     @ManyToOne
