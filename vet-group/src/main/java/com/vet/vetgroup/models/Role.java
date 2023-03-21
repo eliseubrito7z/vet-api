@@ -1,12 +1,14 @@
 package com.vet.vetgroup.models;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-public class Role implements Serializable {
+public class Role implements GrantedAuthority, Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -59,5 +61,10 @@ public class Role implements Serializable {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String getAuthority() {
+        return this.description;
     }
 }
