@@ -1,4 +1,4 @@
-package com.vet.vetgroup.dtos.response;
+package com.vet.vetgroup.dtos.responses;
 
 import com.vet.vetgroup.dtos.reduceds.PatientReducedDto;
 import com.vet.vetgroup.dtos.reduceds.StaffReducedDto;

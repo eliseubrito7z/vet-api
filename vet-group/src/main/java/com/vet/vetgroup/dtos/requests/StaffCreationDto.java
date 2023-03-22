@@ -1,4 +1,4 @@
-package com.vet.vetgroup.dtos.creation;
+package com.vet.vetgroup.dtos.requests;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;

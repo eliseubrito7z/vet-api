@@ -1,4 +1,4 @@
-package com.vet.vetgroup.dtos.creation;
+package com.vet.vetgroup.dtos.requests;
 
 import com.vet.vetgroup.enums.PaymentStatus;
 import com.vet.vetgroup.enums.ServiceStatus;

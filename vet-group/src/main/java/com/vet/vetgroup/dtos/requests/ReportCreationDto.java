@@ -1,23 +1,16 @@
-package com.vet.vetgroup.dtos.response;
+package com.vet.vetgroup.dtos.requests;
 
-import java.util.Date;
+import jakarta.validation.constraints.NotNull;
 
-public class ReportResponseDto {
-    private Long id;
+public class ReportCreationDto {
+
+    @NotNull
     private String title;
+    @NotNull
     private String description;
     private Integer paymentValue;
+    @NotNull
     private Integer type;
-    private Date createdAt;
-    private Boolean approved;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -49,21 +42,5 @@ public class ReportResponseDto {
 
     public void setType(Integer type) {
         this.type = type;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Boolean getApproved() {
-        return approved;
-    }
-
-    public void setApproved(Boolean approved) {
-        this.approved = approved;
     }
 }

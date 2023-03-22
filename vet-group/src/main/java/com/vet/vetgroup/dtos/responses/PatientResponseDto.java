@@ -1,4 +1,4 @@
-package com.vet.vetgroup.dtos.response;
+package com.vet.vetgroup.dtos.responses;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
