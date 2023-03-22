@@ -2,6 +2,7 @@ package com.vet.vetgroup.services;
 
 import com.vet.vetgroup.models.Role;
 import com.vet.vetgroup.models.RoleHistoric;
+import com.vet.vetgroup.models.Staff;
 import com.vet.vetgroup.models.User;
 import com.vet.vetgroup.repositories.RoleRepository;
 import com.vet.vetgroup.repositories.UserRepository;
@@ -13,8 +14,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,11 +41,23 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public User insert(User newUser) {
-        User userByUsername = repository.findByUsername(newUser.getUserName());
+    public User insert(Staff newStaff) {
+        User userByUsername = repository.findByEmail(newStaff.getEmail());
         if (userByUsername != null) {
             throw new IllegalArgumentException("Username is already registered!");
         }
+        List rolesArray = new ArrayList();
+        rolesArray.add(newStaff.getRole());
+        User newUser = new User();
+        newUser.setEnabled(true);
+        newUser.setAccountNonLocked(true);
+        newUser.setAccountNonExpired(true);
+        newUser.setCredentialsNonExpired(true);
+        newUser.setRoles(rolesArray);
+        newUser.setEmail(newStaff.getEmail());
+        newUser.setPassword(newStaff.getPassword());
+        newUser.setFullName(newStaff.getFullName());
+
         return repository.save(newUser);
     }
 
@@ -62,7 +73,7 @@ public class UserService implements UserDetailsService {
 
 
     public ResponseEntity disableUser(String email) {
-        User user = repository.findByUsername(email);
+        User user = repository.findByEmail(email);
 
         if (!user.getAccountNonLocked()) {
             throw new IllegalArgumentException("This account is already locked!");
@@ -79,7 +90,7 @@ public class UserService implements UserDetailsService {
     }
 
     public ResponseEntity enableUser(String email) {
-        User user = repository.findByUsername(email);
+        User user = repository.findByEmail(email);
 
         if (user.getAccountNonLocked()) {
             throw new IllegalArgumentException("This account is already unlocked!");
@@ -96,32 +107,28 @@ public class UserService implements UserDetailsService {
     }
 
     public ResponseEntity updateUserRole(RoleHistoric roleHistoric) {
-        System.out.println("USER NAME " + roleHistoric.getStaff().getEmail());
-        User user = repository.findByUsername(roleHistoric.getStaff().getEmail());
-
-        System.out.println("PEGOU USER "+ user.getFullName());
+        User user = repository.findByEmail(roleHistoric.getStaff().getEmail());
 
         if (user == null) {
-            throw new IllegalArgumentException("USER TA NULO");
+            throw new IllegalArgumentException("User not found!");
         }
 
         Optional<Role> role = roleRepository.findById(roleHistoric.getRole().getId());
-        List<Role> roleList = new ArrayList<>();
-        roleList.add(role.get());
-
-        user.setRoles(roleList);
+        List rolesArray = new ArrayList();
+        rolesArray.add(role);
+        user.setRoles(rolesArray);
         update(user);
         return ResponseEntity.noContent().build();
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var user = repository.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        var user = repository.findByEmail(email);
 
         if (user != null) {
             return user;
         } else {
-            throw new UsernameNotFoundException("Username " +username+ " not found!");
+            throw new UsernameNotFoundException("Email " +email+ " not found!");
         }
     }
 }

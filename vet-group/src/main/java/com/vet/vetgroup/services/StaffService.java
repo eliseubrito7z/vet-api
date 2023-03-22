@@ -5,6 +5,7 @@ import com.vet.vetgroup.dtos.creation.StaffCreationDto;
 import com.vet.vetgroup.models.Role;
 import com.vet.vetgroup.models.RoleHistoric;
 import com.vet.vetgroup.models.Staff;
+import com.vet.vetgroup.models.User;
 import com.vet.vetgroup.repositories.StaffRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class StaffService {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private UserService userService;
 
     public List<Staff> findAll() {
         return repository.findAll();
@@ -54,7 +58,9 @@ public class StaffService {
         staffModel.setRole(role);
         staffModel.setOnDuty(false);
 
+        userService.insert(staffModel);
         repository.save(staffModel);
+
         return staffModel.getId();
     }
 
