@@ -12,6 +12,8 @@ public class StaffCreationDto {
     private String fullName;
     @Email
     private String email;
+    @NotNull
+    private String password;
     @CPF
     private String cpf;
     private String avatarUrl;
@@ -42,6 +44,14 @@ public class StaffCreationDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getCpf() {

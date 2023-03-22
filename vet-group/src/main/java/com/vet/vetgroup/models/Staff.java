@@ -21,12 +21,12 @@ public class Staff implements Serializable {
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
-    @Column(nullable = false)
-    private String role;
     @Column(name = "full_name", nullable = false)
     private String fullName;
     @Column(nullable = false, unique = true)
     private String email;
+    @Column(nullable = false, unique = true)
+    private String password;
     @Column(nullable = false, unique = true)
     private String cpf;
     @Column(name = "avatar_url", nullable = true)
@@ -49,6 +49,10 @@ public class Staff implements Serializable {
     @OneToMany(mappedBy = "approver")
     private List<Report> reportApprover;
 
+    @OneToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
     public Long getId() {
         return id;
     }
@@ -65,14 +69,6 @@ public class Staff implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public String getFullName() {
         return fullName;
     }
@@ -87,6 +83,14 @@ public class Staff implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getCpf() {
@@ -135,6 +139,14 @@ public class Staff implements Serializable {
 
     public void setWorkLoadCompleted(Integer workLoadCompleted) {
         this.workLoadCompleted = workLoadCompleted;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override
