@@ -48,8 +48,12 @@ public class StaffService {
 
     public Long insert(StaffCreationDto dto) {
         Staff staffModel = new Staff();
+        Role role = roleService.findByDescription(dto.getRole());
         BeanUtils.copyProperties(dto, staffModel);
         staffModel.setCreatedAt(new Date());
+        staffModel.setRole(role);
+        staffModel.setOnDuty(false);
+
         repository.save(staffModel);
         return staffModel.getId();
     }
