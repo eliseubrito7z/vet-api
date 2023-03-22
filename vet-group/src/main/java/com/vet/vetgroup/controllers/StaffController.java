@@ -27,8 +27,12 @@ public class StaffController {
     private StaffService service;
 
     @PostMapping(value = "/create")
-    public ResponseEntity<Long> create(@RequestBody @Valid StaffCreationDto dto) {
-        return ResponseEntity.ok().body(service.insert(dto));
+    public ResponseEntity create(@RequestBody @Valid StaffCreationDto dto) {
+        try {
+            return ResponseEntity.ok().body(service.insert(dto));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PatchMapping(value = "/on-duty")
