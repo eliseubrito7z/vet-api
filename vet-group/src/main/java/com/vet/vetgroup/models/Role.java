@@ -1,10 +1,13 @@
 package com.vet.vetgroup.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,6 +27,9 @@ public class Role implements GrantedAuthority, Serializable {
                     name = "privilege_id", referencedColumnName = "id"))
     private Collection<Privilege> privileges;
 
+    @OneToOne(mappedBy = "role")
+    private Staff staff;
+
     public Long getId() {
         return id;
     }
@@ -40,8 +46,12 @@ public class Role implements GrantedAuthority, Serializable {
         this.description = description;
     }
 
-    public Collection<Privilege> getPrivileges() {
-        return privileges;
+    public List<String> getPrivileges() {
+        List privilegesList = new ArrayList();
+        for (Privilege privilege : privileges) {
+            privilegesList.add(privilege.getDescription());
+        }
+        return privilegesList;
     }
 
     public void setPrivileges(Collection<Privilege> privileges) {
@@ -63,6 +73,7 @@ public class Role implements GrantedAuthority, Serializable {
         return id != null ? id.hashCode() : 0;
     }
 
+    @JsonIgnore
     @Override
     public String getAuthority() {
         return this.description;
