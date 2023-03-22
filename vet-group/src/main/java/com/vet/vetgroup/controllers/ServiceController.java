@@ -1,6 +1,6 @@
 package com.vet.vetgroup.controllers;
 
-import com.vet.vetgroup.dtos.creation.ServiceCreationDto;
+import com.vet.vetgroup.dtos.requests.ServiceCreationDto;
 import com.vet.vetgroup.dtos.updates.UpdateDescription;
 import com.vet.vetgroup.enums.PaymentStatus;
 import com.vet.vetgroup.enums.ServiceStatus;

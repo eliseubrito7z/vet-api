@@ -1,11 +1,10 @@
 package com.vet.vetgroup.services;
 
-import com.vet.vetgroup.dtos.creation.RoleHistoricCreationDto;
-import com.vet.vetgroup.dtos.creation.StaffCreationDto;
+import com.vet.vetgroup.dtos.requests.RoleHistoricCreationDto;
+import com.vet.vetgroup.dtos.requests.StaffCreationDto;
 import com.vet.vetgroup.models.Role;
 import com.vet.vetgroup.models.RoleHistoric;
 import com.vet.vetgroup.models.Staff;
-import com.vet.vetgroup.models.User;
 import com.vet.vetgroup.repositories.StaffRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

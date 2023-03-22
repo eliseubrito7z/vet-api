@@ -1,9 +1,8 @@
 package com.vet.vetgroup.controllers;
 
-import com.vet.vetgroup.dtos.creation.ReportCreationDto;
+import com.vet.vetgroup.dtos.requests.ReportCreationDto;
 import com.vet.vetgroup.models.Report;
 import com.vet.vetgroup.services.ReportService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

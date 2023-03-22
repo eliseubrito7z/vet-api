@@ -1,9 +1,7 @@
 package com.vet.vetgroup.services;
 
-import com.vet.vetgroup.dtos.creation.PatientCreationDto;
-import com.vet.vetgroup.dtos.creation.StaffCreationDto;
+import com.vet.vetgroup.dtos.requests.PatientCreationDto;
 import com.vet.vetgroup.models.Patient;
-import com.vet.vetgroup.models.Staff;
 import com.vet.vetgroup.repositories.PatientRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

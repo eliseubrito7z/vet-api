@@ -1,13 +1,10 @@
 package com.vet.vetgroup.controllers;
 
-import com.vet.vetgroup.dtos.creation.RoleHistoricCreationDto;
-import com.vet.vetgroup.dtos.creation.StaffCreationDto;
-import com.vet.vetgroup.dtos.response.StaffResponseDto;
+import com.vet.vetgroup.dtos.requests.RoleHistoricCreationDto;
+import com.vet.vetgroup.dtos.requests.StaffCreationDto;
 import com.vet.vetgroup.models.Staff;
 import com.vet.vetgroup.services.StaffService;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,9 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/staff/v2")

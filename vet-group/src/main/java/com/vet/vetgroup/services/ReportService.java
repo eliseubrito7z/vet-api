@@ -1,8 +1,6 @@
 package com.vet.vetgroup.services;
 
-import com.vet.vetgroup.dtos.creation.PatientCreationDto;
-import com.vet.vetgroup.dtos.creation.ReportCreationDto;
-import com.vet.vetgroup.models.Patient;
+import com.vet.vetgroup.dtos.requests.ReportCreationDto;
 import com.vet.vetgroup.models.Report;
 import com.vet.vetgroup.models.Staff;
 import com.vet.vetgroup.repositories.ReportRepository;
@@ -10,7 +8,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

@@ -57,6 +57,7 @@ public class SecurityConfig {
                 .addFilterBefore(filterChainExceptionHandler, LogoutFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
+                        .requestMatchers("/api/staff/v1/create").authenticated()
                         .anyRequest().permitAll()
                 )
                 .cors()

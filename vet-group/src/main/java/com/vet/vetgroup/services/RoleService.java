@@ -1,14 +1,10 @@
 package com.vet.vetgroup.services;
 
-import com.vet.vetgroup.dtos.creation.PatientCreationDto;
-import com.vet.vetgroup.models.Patient;
 import com.vet.vetgroup.models.Role;
 import com.vet.vetgroup.repositories.RoleRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

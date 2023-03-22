@@ -1,10 +1,8 @@
 package com.vet.vetgroup.controllers;
 
-import com.vet.vetgroup.dtos.creation.PatientCreationDto;
-import com.vet.vetgroup.dtos.creation.StaffCreationDto;
+import com.vet.vetgroup.dtos.requests.PatientCreationDto;
 import com.vet.vetgroup.models.Patient;
 import com.vet.vetgroup.services.PatientService;
-import com.vet.vetgroup.services.StaffService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
