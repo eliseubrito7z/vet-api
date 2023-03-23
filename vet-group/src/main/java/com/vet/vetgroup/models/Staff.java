@@ -49,7 +49,7 @@ public class Staff implements Serializable {
     @OneToMany(mappedBy = "approver")
     private List<Report> reportApprover;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 

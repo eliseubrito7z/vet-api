@@ -27,8 +27,8 @@ public class Role implements GrantedAuthority, Serializable {
                     name = "privilege_id", referencedColumnName = "id"))
     private Collection<Privilege> privileges;
 
-    @OneToOne(mappedBy = "role")
-    private Staff staff;
+    @OneToMany(mappedBy = "role")
+    private List<Staff> staff;
 
     public Long getId() {
         return id;
