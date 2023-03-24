@@ -1,6 +1,5 @@
 package com.vet.vetgroup.dtos.requests;
 
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
@@ -12,12 +11,11 @@ public class PatientCreationDto {
     @NotNull
     private String name;
     @NotNull
-    @Max(11)
     private String ownerContact;
     @NotNull
     private String breed;
     @NotNull
-    private Date birthDate;
+    private String birthDate;
     private String avatarUrl;
     @NotNull
     private String kind;
@@ -56,11 +54,11 @@ public class PatientCreationDto {
         this.breed = breed;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

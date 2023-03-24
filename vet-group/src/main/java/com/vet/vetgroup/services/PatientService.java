@@ -33,6 +33,7 @@ public class PatientService {
         Patient patientModel = new Patient();
         BeanUtils.copyProperties(dto, patientModel);
         patientModel.setCreatedAt(new Date());
+        patientModel.setBirthDate(new Date(dto.getBirthDate()));
         repository.save(patientModel);
         return patientModel.getId();
     }
