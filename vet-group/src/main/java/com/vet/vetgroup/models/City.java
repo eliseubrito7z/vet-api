@@ -1,5 +1,6 @@
 package com.vet.vetgroup.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -16,6 +17,7 @@ public class City implements Serializable {
     @Column(nullable = false, updatable = false, unique = true)
     public String name;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "city")
     private Service service;
 
