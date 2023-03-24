@@ -51,7 +51,7 @@ public class ServiceController {
     @PutMapping(value = "/{id}/update-description")
     public ResponseEntity<Service> updateDescription(
             @PathVariable Long id,
-            @RequestBody UpdateDescription body,
+            @RequestBody @Valid UpdateDescription body,
             @RequestHeader(HttpHeaders.AUTHORIZATION) String token
     ) {
         Service serviceModel = service.updateDescription(token, body.getDescription(), id);
