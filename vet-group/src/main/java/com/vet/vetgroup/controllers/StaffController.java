@@ -30,13 +30,16 @@ public class StaffController {
         }
     }
 
-    @PatchMapping(value = "/on-duty")
-    public ResponseEntity<Void> updateOnDuty(
-            @RequestParam Boolean onDuty,
+    @PatchMapping(params = "on-duty")
+    public ResponseEntity updateOnDuty(
+            @RequestParam(name = "on-duty", required = true) Boolean onDuty,
             @RequestHeader(HttpHeaders.AUTHORIZATION) String token
     ) {
-        Staff staff = service.findByToken(token);
-        return ResponseEntity.ok().build();
+        try {
+            return ResponseEntity.ok().body(service.updateOnDuty(token, onDuty));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping(value = "update-role")

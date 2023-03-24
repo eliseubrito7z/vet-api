@@ -8,6 +8,7 @@ import com.vet.vetgroup.models.RoleHistoric;
 import com.vet.vetgroup.models.Staff;
 import com.vet.vetgroup.models.User;
 import com.vet.vetgroup.repositories.StaffRepository;
+import com.vet.vetgroup.security.jwt.JwtTokenProvider;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,9 @@ public class StaffService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
     public List<Staff> findAll() {
         return repository.findAll();
     }
@@ -49,7 +53,7 @@ public class StaffService {
     public Staff findByEmail(String email) {
         Optional<Staff> staff = Optional.ofNullable(repository.findByEmail(email));
 
-        if(staff.isEmpty()) throw new IllegalArgumentException("This Staff not exists");
+        if(staff.isEmpty()) throw new IllegalArgumentException("Staff not found!");
 
         return staff.get();
     }
@@ -71,10 +75,23 @@ public class StaffService {
 
     public Staff findByToken(String tokenUnformatted) {
         String tokenFormatted = tokenUnformatted.substring("Bearer ".length());
-        String staffEmail = "teste";
+        String staffEmail = jwtTokenProvider.decodedToken(tokenFormatted).getSubject();
         Staff staff = findByEmail(staffEmail);
 
-        // TODO: get user email extracting subject of token using jwtProvider
+        return staff;
+    }
+
+    public Staff updateOnDuty(String tokenUnformatted, Boolean onDuty) {
+        String tokenFormatted = tokenUnformatted.substring("Bearer ".length());
+        String staffEmail = jwtTokenProvider.decodedToken(tokenFormatted).getSubject();
+        Staff staff = findByEmail(staffEmail);
+
+        if (staff.getOnDuty() == onDuty) {
+            throw new IllegalArgumentException("The onDuty of this staff is already "+onDuty);
+        }
+
+        staff.setOnDuty(onDuty);
+        update(staff);
         return staff;
     }
 
