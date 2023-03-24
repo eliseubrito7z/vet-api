@@ -42,7 +42,7 @@ public class StaffController {
         }
     }
 
-    @PutMapping(value = "update-role")
+    @PutMapping(value = "/update-role")
     public ResponseEntity<Staff> updateRole(
             @RequestBody @Valid RoleHistoricCreationDto roleHistoricDto,
             @RequestHeader(HttpHeaders.AUTHORIZATION) String token
