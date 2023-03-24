@@ -1,5 +1,6 @@
 package com.vet.vetgroup.services;
 
+import com.vet.vetgroup.dtos.requests.CityCreationDto;
 import com.vet.vetgroup.models.City;
 import com.vet.vetgroup.repositories.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,9 @@ public class CityService {
         return repository.findByName(nameAndUF);
     }
 
-    public City insert(City city) {
+    public City insert(CityCreationDto dto) {
+        City city = new City();
+        city.setName(dto.getNameAndUF());
         return repository.save(city);
     }
 

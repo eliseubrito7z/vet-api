@@ -1,5 +1,6 @@
 package com.vet.vetgroup.controllers;
 
+import com.vet.vetgroup.dtos.requests.CityCreationDto;
 import com.vet.vetgroup.models.City;
 import com.vet.vetgroup.services.CityService;
 import jakarta.validation.Valid;
@@ -19,8 +20,8 @@ public class CityController {
     private CityService service;
 
     @PostMapping(value = "/create")
-    public ResponseEntity<Void> create(@RequestBody @Valid City city) {
-        service.insert(city);
+    public ResponseEntity<Void> create(@RequestBody @Valid CityCreationDto cityDto) {
+        service.insert(cityDto);
         return ResponseEntity.ok().build();
     }
 
