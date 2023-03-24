@@ -100,6 +100,10 @@ public class StaffService {
         Staff promotedBy = findByToken(tokenUnformatted);
         Role role = roleService.findByDescription(roleDto.getRoleDescription());
 
+        if (staff.getRole() == role) {
+            throw new IllegalArgumentException("This staff is already in role "+role.getDescription());
+        }
+
         RoleHistoric roleHistoric = new RoleHistoric();
         BeanUtils.copyProperties(roleDto, roleHistoric);
 
