@@ -1,5 +1,7 @@
 package com.vet.vetgroup.services;
 
+import com.vet.vetgroup.dtos.requests.StaffCreationDto;
+import com.vet.vetgroup.mappers.UserMapper;
 import com.vet.vetgroup.models.Role;
 import com.vet.vetgroup.models.RoleHistoric;
 import com.vet.vetgroup.models.Staff;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -41,24 +44,14 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public User insert(Staff newStaff) {
-        User userByUsername = repository.findByEmail(newStaff.getEmail());
+    public User insert(User user) {
+        User userByUsername = repository.findByEmail(user.getEmail());
+
         if (userByUsername != null) {
             throw new IllegalArgumentException("Username is already registered!");
         }
-        List rolesArray = new ArrayList();
-        rolesArray.add(newStaff.getRole());
-        User newUser = new User();
-        newUser.setEnabled(true);
-        newUser.setAccountNonLocked(true);
-        newUser.setAccountNonExpired(true);
-        newUser.setCredentialsNonExpired(true);
-        newUser.setRoles(rolesArray);
-        newUser.setEmail(newStaff.getEmail());
-        newUser.setPassword(newStaff.getPassword());
-        newUser.setFullName(newStaff.getFullName());
 
-        return repository.save(newUser);
+        return repository.save(user);
     }
 
     @Transactional
