@@ -18,7 +18,6 @@ public class Staff implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
     @Column(name = "full_name", nullable = false)

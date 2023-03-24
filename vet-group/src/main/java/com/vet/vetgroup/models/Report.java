@@ -24,7 +24,6 @@ public class Report implements Serializable {
     private Integer paymentValue;
     @Column(nullable = false, unique = false)
     private Integer type;
-    @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
     @Column(nullable = true, unique = false)

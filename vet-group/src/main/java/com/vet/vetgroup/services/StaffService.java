@@ -106,6 +106,7 @@ public class StaffService {
         roleHistoric.setRole(role);
         roleHistoric.setStaff(staff);
         roleHistoric.setPromoter(promotedBy);
+        roleHistoric.setStartedIn(new Date());
 
         roleHistoricService.insert(roleHistoric);
         update(staff);

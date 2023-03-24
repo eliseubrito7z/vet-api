@@ -15,7 +15,6 @@ public class RoleHistoric  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @CreatedDate
     @Column(unique = false, nullable = false, updatable = false)
     private Date startedIn;
     @Column(unique = false, nullable = false, updatable = false)
