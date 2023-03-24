@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +39,8 @@ public class ReportService {
         BeanUtils.copyProperties(dto, reportModel);
 
         reportModel.setCreatedBy(createdBy);
+        reportModel.setCreatedAt(new Date());
+        reportModel.setType(dto.getType());
 
         repository.save(reportModel);
         return reportModel.getId();
@@ -46,6 +49,10 @@ public class ReportService {
     public Report updateApproved(String token, Boolean approved, Long reportId) {
         Report report = findById(reportId);
         Staff approver = staffService.findByToken(token);
+
+        if (approver.getRole().getId() >= 2) {
+            throw new IllegalArgumentException("You dont have permission to update the report status");
+        }
 
         report.setApproved(approved);
         report.setApprover(approver);
