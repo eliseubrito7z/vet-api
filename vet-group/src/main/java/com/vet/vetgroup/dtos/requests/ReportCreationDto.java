@@ -1,5 +1,6 @@
 package com.vet.vetgroup.dtos.requests;
 
+import com.vet.vetgroup.enums.ReportTypes;
 import jakarta.validation.constraints.NotNull;
 
 public class ReportCreationDto {
@@ -10,7 +11,7 @@ public class ReportCreationDto {
     private String description;
     private Integer paymentValue;
     @NotNull
-    private Integer type;
+    private ReportTypes type;
 
     public String getTitle() {
         return title;
@@ -36,11 +37,11 @@ public class ReportCreationDto {
         this.paymentValue = paymentValue;
     }
 
-    public Integer getType() {
+    public ReportTypes getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(ReportTypes type) {
         this.type = type;
     }
 }
