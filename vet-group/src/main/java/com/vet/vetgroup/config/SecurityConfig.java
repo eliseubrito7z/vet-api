@@ -6,6 +6,7 @@ import com.vet.vetgroup.security.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,6 +21,7 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
 
 import java.util.HashMap;
 import java.util.Map;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -57,8 +59,14 @@ public class SecurityConfig {
                 .addFilterBefore(filterChainExceptionHandler, LogoutFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/api/staff/v1/create").authenticated()
-                        .anyRequest().permitAll()
+                        .requestMatchers(
+                                "/api/cities/v2/create",
+                                        "/api/staff/v2/create"
+                        ).hasAnyAuthority("CEO", "GENERAL_MANAGER")
+
+                        .requestMatchers(HttpMethod.DELETE, "/api/**"
+                        ).hasAnyAuthority("CEO", "GENERAL_MANAGER")
+                        .anyRequest().authenticated()
                 )
                 .cors()
                 .and()
