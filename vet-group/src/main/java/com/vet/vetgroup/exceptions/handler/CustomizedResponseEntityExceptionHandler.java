@@ -1,7 +1,7 @@
 package com.vet.vetgroup.exceptions.handler;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.vet.vetgroup.exceptions.ExceptionResponse;
-import com.vet.vetgroup.exceptions.TokenExpired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -32,10 +32,10 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(TokenExpired.class)
+    @ExceptionHandler(TokenExpiredException.class)
     final ResponseEntity<ExceptionResponse> handleTokenExpired(Exception ex, WebRequest request) {
         ExceptionResponse exceptionResponse =
-                new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+                new ExceptionResponse(new Date(), "token.expired", request.getDescription(false));
 
         return new ResponseEntity<>(exceptionResponse, HttpStatus.UNAUTHORIZED);
     }
