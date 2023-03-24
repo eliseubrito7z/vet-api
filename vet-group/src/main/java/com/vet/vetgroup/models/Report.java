@@ -1,5 +1,6 @@
 package com.vet.vetgroup.models;
 
+import com.vet.vetgroup.enums.ReportTypes;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -69,12 +70,14 @@ public class Report implements Serializable {
         this.paymentValue = paymentValue;
     }
 
-    public Integer getType() {
-        return type;
+    public ReportTypes getType() {
+        return ReportTypes.valueOf(type);
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setType(ReportTypes type) {
+        if (type != null) {
+            this.type = type.getCode();
+        }
     }
 
     public Date getCreatedAt() {
