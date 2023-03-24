@@ -108,6 +108,8 @@ public class StaffService {
         roleHistoric.setPromoter(promotedBy);
         roleHistoric.setStartedIn(new Date());
 
+        staff.setRole(role);
+
         roleHistoricService.insert(roleHistoric);
         update(staff);
         return staff;
