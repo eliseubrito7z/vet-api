@@ -12,12 +12,9 @@ public class ServiceCreationDto {
     @NotNull
     private String reason;
     @NotNull
-    private Date serviceDate;
-    @NotNull
+    private String serviceDate;
     private ServiceTypes type;
-    @NotNull
     private ServiceStatus status;
-    @NotNull
     private PaymentStatus paymentStatus;
     @NotNull
     private Long patientId;
@@ -36,11 +33,11 @@ public class ServiceCreationDto {
         this.reason = reason;
     }
 
-    public Date getServiceDate() {
+    public String getServiceDate() {
         return serviceDate;
     }
 
-    public void setServiceDate(Date serviceDate) {
+    public void setServiceDate(String serviceDate) {
         this.serviceDate = serviceDate;
     }
 

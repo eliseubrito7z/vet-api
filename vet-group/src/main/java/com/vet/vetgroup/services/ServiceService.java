@@ -54,6 +54,7 @@ public class ServiceService {
             serviceModel.setServiceDate(new Date());
         }
 
+        serviceModel.setCreatedAt(new Date());
         serviceModel.setType(dto.getType());
         serviceModel.setPaymentStatus(dto.getPaymentStatus());
         serviceModel.setStatus(dto.getStatus());
