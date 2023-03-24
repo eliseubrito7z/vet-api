@@ -21,13 +21,13 @@ public class Service implements Serializable {
     private Date createdAt;
     @Column(nullable = false, updatable = false)
     private String reason;
-    @Column(nullable = true, updatable = false)
+    @Column(nullable = true)
     private String description;
     @Column(name = "service_date", nullable = false, updatable = false)
     private Date serviceDate;
     @Column(nullable = false, updatable = false)
     private Integer type;
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false)
     private Integer status;
     @Column(name = "payment_status", nullable = false)
     private Integer paymentStatus;
