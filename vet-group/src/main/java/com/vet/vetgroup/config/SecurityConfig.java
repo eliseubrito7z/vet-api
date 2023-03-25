@@ -59,6 +59,12 @@ public class SecurityConfig {
                 .addFilterBefore(filterChainExceptionHandler, LogoutFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
+                        .requestMatchers("/auth/signin",
+                                "/auth/refresh",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**"
+                        ).permitAll()
+
                         .requestMatchers(
                                 "/api/cities/v2/create",
                                         "/api/staff/v2/create"
@@ -66,7 +72,7 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.DELETE, "/api/**"
                         ).hasAnyAuthority("CEO", "GENERAL_MANAGER")
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/**").authenticated()
                 )
                 .cors()
                 .and()
