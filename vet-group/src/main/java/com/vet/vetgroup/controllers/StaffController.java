@@ -4,6 +4,7 @@ import com.vet.vetgroup.dtos.requests.RoleHistoricCreationDto;
 import com.vet.vetgroup.dtos.requests.StaffCreationDto;
 import com.vet.vetgroup.models.Staff;
 import com.vet.vetgroup.services.StaffService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -21,12 +22,14 @@ public class StaffController {
     @Autowired
     private StaffService service;
 
-    @PostMapping(value = "/create")
+    @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Create a staff", description = "Endpoint for create a staff")
     public ResponseEntity create(@RequestBody @Valid StaffCreationDto dto) {
         return ResponseEntity.ok().body(service.insert(dto));
     }
 
-    @PatchMapping(params = "on-duty")
+    @PatchMapping(params = "on-duty", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Update onDuty state", description = "Endpoint for update onDuty")
     public ResponseEntity updateOnDuty(
             @RequestParam(name = "on-duty", required = true) Boolean onDuty,
             @RequestHeader(HttpHeaders.AUTHORIZATION) String token
@@ -34,7 +37,8 @@ public class StaffController {
         return ResponseEntity.ok().body(service.updateOnDuty(token, onDuty));
     }
 
-    @PutMapping(value = "/update-role")
+    @PutMapping(value = "/update-role", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Update role", description = "Endpoint for update role of staff")
     public ResponseEntity<Staff> updateRole(
             @RequestBody @Valid RoleHistoricCreationDto roleHistoricDto,
             @RequestHeader(HttpHeaders.AUTHORIZATION) String token
@@ -44,25 +48,29 @@ public class StaffController {
     }
 
 
-    @GetMapping(value = "/me")
+    @GetMapping(value = "/me", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Get personal data", description = "Endpoint for get the personal details using token")
     public ResponseEntity<Staff> findByToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
         Staff staff = service.findByToken(token);
         return ResponseEntity.ok().body(staff);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Find all staff", description = "Endpoint for get all staff")
     public ResponseEntity<List<Staff>> findAll() {
         List<Staff> list = service.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Find a staff", description = "Endpoint for get a staff by id")
     public ResponseEntity<Staff> findById(@PathVariable Long id) {
         Staff staff = service.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(staff);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Delete by id", description = "Endpoint for delete a staff by id")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         service.deleteById(id);
         return ResponseEntity.ok().build();

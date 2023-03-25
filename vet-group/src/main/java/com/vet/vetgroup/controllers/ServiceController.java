@@ -6,6 +6,7 @@ import com.vet.vetgroup.enums.PaymentStatus;
 import com.vet.vetgroup.enums.ServiceStatus;
 import com.vet.vetgroup.models.Service;
 import com.vet.vetgroup.services.ServiceService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -23,12 +24,14 @@ public class ServiceController {
     @Autowired
     private ServiceService service;
 
-    @PostMapping(value = "/create")
+    @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Create a service", description = "Endpoint for create a service")
     public ResponseEntity<Long> create(@RequestBody @Valid ServiceCreationDto dto) {
         return ResponseEntity.ok().body(service.insert(dto));
     }
 
-    @PatchMapping(value = "/{id}/update-status")
+    @PatchMapping(value = "/{id}/update-status", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Update status", description = "Endpoint for update status of service")
     public ResponseEntity<Service> updateStatus(
             @PathVariable Long id,
             @RequestParam(name = "status", required = true) ServiceStatus status,
@@ -38,7 +41,8 @@ public class ServiceController {
         return ResponseEntity.ok().body(serviceModel);
     }
 
-    @PatchMapping(value = "/{id}/update-payment")
+    @PatchMapping(value = "/{id}/update-payment", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Update status of payment", description = "Endpoint for update status payment of report")
     public ResponseEntity<Service> updatePaymentStatus(
             @PathVariable Long id,
             @RequestParam(name = "payment-status", required = true) PaymentStatus status,
@@ -48,7 +52,8 @@ public class ServiceController {
         return ResponseEntity.ok().body(serviceModel);
     }
 
-    @PutMapping(value = "/{id}/update-description")
+    @PutMapping(value = "/{id}/update-description", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Update description", description = "Endpoint for update description of report")
     public ResponseEntity<Service> updateDescription(
             @PathVariable Long id,
             @RequestBody @Valid UpdateDescription body,
@@ -59,18 +64,21 @@ public class ServiceController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Find all services", description = "Endpoint for get all services")
     public ResponseEntity<List<Service>> findAll() {
         List<Service> list = service.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Find a services", description = "Endpoint for get a service by id")
     public ResponseEntity<Service> findById(@PathVariable Long id) {
         Service patient = service.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(patient);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Delete by id", description = "Endpoint for delete a service by id")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         service.deleteById(id);
         return ResponseEntity.ok().build();

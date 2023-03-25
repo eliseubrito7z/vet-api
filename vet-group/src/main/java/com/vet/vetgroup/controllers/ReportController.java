@@ -3,6 +3,7 @@ package com.vet.vetgroup.controllers;
 import com.vet.vetgroup.dtos.requests.ReportCreationDto;
 import com.vet.vetgroup.models.Report;
 import com.vet.vetgroup.services.ReportService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,7 +21,8 @@ public class ReportController {
     @Autowired
     private ReportService service;
 
-    @PostMapping(value = "/create")
+    @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Create a report", description = "Endpoint for create a report")
     public ResponseEntity<Long> create(
             @RequestBody @Valid ReportCreationDto dto,
             @RequestHeader(HttpHeaders.AUTHORIZATION) String token
@@ -28,7 +30,8 @@ public class ReportController {
         return ResponseEntity.ok().body(service.insert(dto, token));
     }
 
-    @PatchMapping(value = "/{id}", params = "approved", consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(value = "/{id}", params = "approved", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Update status", description = "Endpoint for update status of report")
     public ResponseEntity<Report> updateApproved(
             @PathVariable Long id,
             @RequestParam(value = "approved", required = true) Boolean approved,
@@ -39,18 +42,21 @@ public class ReportController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Find all reports", description = "Endpoint for get all reports")
     public ResponseEntity<List<Report>> findAll() {
         List<Report> list = service.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Find a report by id", description = "Endpoint for get a report by id")
     public ResponseEntity<Report> findById(@PathVariable Long id) {
         Report patient = service.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(patient);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Delete by id", description = "Endpoint for delete a report by id")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         service.deleteById(id);
         return ResponseEntity.ok().build();
