@@ -23,11 +23,7 @@ public class StaffController {
 
     @PostMapping(value = "/create")
     public ResponseEntity create(@RequestBody @Valid StaffCreationDto dto) {
-        try {
-            return ResponseEntity.ok().body(service.insert(dto));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok().body(service.insert(dto));
     }
 
     @PatchMapping(params = "on-duty")
@@ -35,11 +31,7 @@ public class StaffController {
             @RequestParam(name = "on-duty", required = true) Boolean onDuty,
             @RequestHeader(HttpHeaders.AUTHORIZATION) String token
     ) {
-        try {
-            return ResponseEntity.ok().body(service.updateOnDuty(token, onDuty));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok().body(service.updateOnDuty(token, onDuty));
     }
 
     @PutMapping(value = "/update-role")

@@ -16,16 +16,11 @@ public class AuthController {
     @SuppressWarnings("rawtypes")
     @PostMapping(value = "/signin")
     public ResponseEntity signin(@RequestBody AccountCredentialsDTO data) {
-        try {
-            if (checkIfParamsIsNotNull(data))
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request");
-
-            var token = authService.signin(data);
-            if (token == null) return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request");
-            return token;
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e);
-        }
+        if (checkIfParamsIsNotNull(data))
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request");
+        var token = authService.signin(data);
+        if (token == null) return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request");
+        return token;
     }
 
     @SuppressWarnings("rawtypes")
