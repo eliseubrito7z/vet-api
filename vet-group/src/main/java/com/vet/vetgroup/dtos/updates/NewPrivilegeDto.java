@@ -2,7 +2,7 @@ package com.vet.vetgroup.dtos.updates;
 
 import jakarta.validation.constraints.NotNull;
 
-public class NewPermissionsDto {
+public class NewPrivilegeDto {
 
     @NotNull
     private String privilege;
