@@ -1,10 +1,9 @@
 package com.vet.vetgroup.services;
 
 import com.vet.vetgroup.dtos.requests.RoleCreationDto;
-import com.vet.vetgroup.dtos.updates.NewPermissionsDto;
+import com.vet.vetgroup.dtos.updates.NewPrivilegeDto;
 import com.vet.vetgroup.models.Privilege;
 import com.vet.vetgroup.models.Role;
-import com.vet.vetgroup.models.Staff;
 import com.vet.vetgroup.repositories.PrivilegeRepository;
 import com.vet.vetgroup.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,17 +50,33 @@ public class RoleService {
         return repository.save(role);
     }
 
-    public Role addNewPermissions(NewPermissionsDto dto, Long id) {
+    public Role addNewPrivilege(NewPrivilegeDto dto, Long id) {
         Role role = findById(id);
         Collection<Privilege> oldPrivileges = role.getPrivileges();
 
         Privilege newPrivilegeModel = privilegeRepository.findByDescription(dto.getPrivilege());
 
         if (oldPrivileges.contains(newPrivilegeModel)) {
-            throw new IllegalArgumentException("This role already contain the privilege ");
+            throw new IllegalArgumentException("This role already contain the privilege "+dto.getPrivilege());
         }
 
         oldPrivileges.add(newPrivilegeModel);
+
+        update(role);
+        return role;
+    }
+
+    public Role removePrivilege(NewPrivilegeDto dto, Long id) {
+        Role role = findById(id);
+        Collection<Privilege> oldPrivileges = role.getPrivileges();
+
+        Privilege newPrivilegeModel = privilegeRepository.findByDescription(dto.getPrivilege());
+
+        if (!oldPrivileges.contains(newPrivilegeModel)) {
+            throw new IllegalArgumentException("This role not contain this privilege");
+        }
+
+        oldPrivileges.remove(newPrivilegeModel);
 
         update(role);
         return role;
