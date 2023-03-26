@@ -2,6 +2,7 @@ package com.vet.vetgroup.controllers;
 
 import com.vet.vetgroup.dtos.requests.RoleHistoricCreationDto;
 import com.vet.vetgroup.dtos.requests.StaffCreationDto;
+import com.vet.vetgroup.dtos.updates.UpdateSalary;
 import com.vet.vetgroup.models.Staff;
 import com.vet.vetgroup.services.StaffService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,6 +36,16 @@ public class StaffController {
             @RequestHeader(HttpHeaders.AUTHORIZATION) String token
     ) {
         return ResponseEntity.ok().body(service.updateOnDuty(token, onDuty));
+    }
+
+    @PutMapping(value = "/update-salary", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Update salary", description = "Endpoint for update salary of staff")
+    public ResponseEntity<Staff> updateSalary(
+            @RequestBody @Valid UpdateSalary updateSalaryDto,
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String token
+    ) {
+        Staff staff = service.updateSalary(token, updateSalaryDto);
+        return ResponseEntity.ok().body(staff);
     }
 
     @PutMapping(value = "/update-role", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)

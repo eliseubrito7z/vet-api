@@ -2,6 +2,7 @@ package com.vet.vetgroup.services;
 
 import com.vet.vetgroup.dtos.requests.RoleHistoricCreationDto;
 import com.vet.vetgroup.dtos.requests.StaffCreationDto;
+import com.vet.vetgroup.dtos.updates.UpdateSalary;
 import com.vet.vetgroup.mappers.UserMapper;
 import com.vet.vetgroup.models.Role;
 import com.vet.vetgroup.models.RoleHistoric;
@@ -91,6 +92,29 @@ public class StaffService {
         }
 
         staff.setOnDuty(onDuty);
+        update(staff);
+        return staff;
+    }
+
+    public Staff updateSalary(String tokenUnformatted, UpdateSalary updateSalaryDto) {
+        Staff staff = findById(updateSalaryDto.getStaff_id());
+        Staff promotedBy = findByToken(tokenUnformatted);
+
+        if (staff.getBaseSalary() == updateSalaryDto.getBaseSalary()) {
+            throw new IllegalArgumentException("The salary is the same!");
+        }
+
+        RoleHistoric roleHistoric = new RoleHistoric();
+        BeanUtils.copyProperties(updateSalaryDto, roleHistoric);
+
+        roleHistoric.setRole(staff.getRole());
+        roleHistoric.setStaff(staff);
+        roleHistoric.setPromoter(promotedBy);
+        roleHistoric.setStartedIn(new Date());
+
+        staff.setBaseSalary(updateSalaryDto.getBaseSalary());
+
+        roleHistoricService.insert(roleHistoric);
         update(staff);
         return staff;
     }
