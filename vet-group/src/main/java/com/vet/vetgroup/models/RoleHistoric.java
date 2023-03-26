@@ -13,7 +13,7 @@ public class RoleHistoric  implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = false, nullable = false, updatable = false)
     private Date startedIn;
