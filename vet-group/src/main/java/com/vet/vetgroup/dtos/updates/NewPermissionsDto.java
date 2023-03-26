@@ -1,20 +1,17 @@
 package com.vet.vetgroup.dtos.updates;
 
-import com.vet.vetgroup.models.Privilege;
 import jakarta.validation.constraints.NotNull;
-
-import java.util.List;
 
 public class NewPermissionsDto {
 
     @NotNull
-    private List<Privilege> privileges;
+    private String privilege;
 
-    public List<Privilege> getPrivileges() {
-        return privileges;
+    public String getPrivilege() {
+        return privilege;
     }
 
-    public void setPrivileges(List<Privilege> privileges) {
-        this.privileges = privileges;
+    public void setPrivilege(String privilege) {
+        this.privilege = privilege;
     }
 }

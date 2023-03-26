@@ -5,6 +5,7 @@ import com.vet.vetgroup.dtos.updates.NewPermissionsDto;
 import com.vet.vetgroup.models.Privilege;
 import com.vet.vetgroup.models.Role;
 import com.vet.vetgroup.models.Staff;
+import com.vet.vetgroup.repositories.PrivilegeRepository;
 import com.vet.vetgroup.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ public class RoleService {
 
     @Autowired
     private RoleRepository repository;
+
+    @Autowired
+    private PrivilegeRepository privilegeRepository;
 
     public List<Role> findAll() {
         return repository.findAll();
@@ -50,11 +54,14 @@ public class RoleService {
     public Role addNewPermissions(NewPermissionsDto dto, Long id) {
         Role role = findById(id);
         Collection<Privilege> oldPrivileges = role.getPrivileges();
-        for(Privilege newPrivilege : dto.getPrivileges()) {
-            if (!oldPrivileges.contains(newPrivilege)) {
-                oldPrivileges.add(newPrivilege);
-            }
+
+        Privilege newPrivilegeModel = privilegeRepository.findByDescription(dto.getPrivilege());
+
+        if (oldPrivileges.contains(newPrivilegeModel)) {
+            throw new IllegalArgumentException("This role already contain the privilege ");
         }
+
+        oldPrivileges.add(newPrivilegeModel);
 
         update(role);
         return role;
