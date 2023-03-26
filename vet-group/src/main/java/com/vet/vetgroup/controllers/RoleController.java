@@ -1,6 +1,7 @@
 package com.vet.vetgroup.controllers;
 
 import com.vet.vetgroup.dtos.requests.RoleCreationDto;
+import com.vet.vetgroup.dtos.updates.NewPermissionsDto;
 import com.vet.vetgroup.models.Role;
 import com.vet.vetgroup.services.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,6 +25,15 @@ public class RoleController {
     @Operation(summary = "Create role", description = "Endpoint for create a new role")
     public ResponseEntity<Role> create(@RequestBody @Valid RoleCreationDto dto) {
         return ResponseEntity.ok().body(service.insert(dto));
+    }
+
+    @PutMapping(value = "/{id}/update-privileges")
+    @Operation(summary = "Add new privileges", description = "Endpoint for add a new privileges")
+    public ResponseEntity addNewPrivileges(
+            @PathVariable Long id,
+            @RequestBody @Valid NewPermissionsDto dto
+    ) {
+        return ResponseEntity.ok().body(service.addNewPermissions(dto, id));
     }
 
 
