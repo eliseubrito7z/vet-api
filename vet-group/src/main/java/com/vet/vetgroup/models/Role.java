@@ -46,12 +46,8 @@ public class Role implements GrantedAuthority, Serializable {
         this.description = description;
     }
 
-    public List<String> getPrivileges() {
-        List privilegesList = new ArrayList();
-        for (Privilege privilege : privileges) {
-            privilegesList.add(privilege.getDescription());
-        }
-        return privilegesList;
+    public Collection<Privilege> getPrivileges() {
+        return this.privileges;
     }
 
     public void setPrivileges(Collection<Privilege> privileges) {
