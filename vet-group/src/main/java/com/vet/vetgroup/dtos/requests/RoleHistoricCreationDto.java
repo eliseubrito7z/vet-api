@@ -12,6 +12,7 @@ public class RoleHistoricCreationDto {
     private Integer weeklyWorkLoad;
     @NotNull
     private Long staff_id;
+
     public String getRoleDescription() {
         return roleDescription;
     }
