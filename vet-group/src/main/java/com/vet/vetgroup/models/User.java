@@ -2,6 +2,7 @@ package com.vet.vetgroup.models;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
@@ -44,7 +45,7 @@ public class User implements UserDetails, Serializable {
     @JoinTable(name = "tb_user_role",
             joinColumns = {@JoinColumn (name = "user_id")},
             inverseJoinColumns = {@JoinColumn (name = "role_id")})
-    private List<Role> roles;
+    private Collection<Role> roles;
 
     public User() {
     }
