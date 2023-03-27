@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS `tb_services` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `created_at` datetime(6) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `payment_status` int NOT NULL,
+  `price` int NOT NULL,
+  `reason` varchar(255) NOT NULL,
+  `service_date` datetime(6) NOT NULL,
+  `status` int NOT NULL,
+  `type` int NOT NULL,
+  `city_id` bigint DEFAULT NULL,
+  `medic_id` bigint DEFAULT NULL,
+  `patient_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK4k3g30emu35t8ygnjwy2xfj2w` (`city_id`),
+  KEY `FK9hicwfef7cgxbolsd9qg35t4g` (`medic_id`),
+  KEY `FKpv33nmk8l6q464ldvpu0beyjn` (`patient_id`),
+  CONSTRAINT `FK4k3g30emu35t8ygnjwy2xfj2w` FOREIGN KEY (`city_id`) REFERENCES `tb_cities` (`id`),
+  CONSTRAINT `FK9hicwfef7cgxbolsd9qg35t4g` FOREIGN KEY (`medic_id`) REFERENCES `tb_staff` (`id`),
+  CONSTRAINT `FKpv33nmk8l6q464ldvpu0beyjn` FOREIGN KEY (`patient_id`) REFERENCES `tb_patients` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
