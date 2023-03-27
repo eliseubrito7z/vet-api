@@ -67,11 +67,13 @@ public class SecurityConfig {
 
                         .requestMatchers(
                                 "/api/cities/v2/create",
-                                        "/api/staff/v2/create"
+                                        "/api/staff/v2/create",
+                                        "/api/roles/v2/**"
                         ).hasAnyAuthority("CEO", "GENERAL_MANAGER")
 
                         .requestMatchers(HttpMethod.DELETE, "/api/**"
                         ).hasAnyAuthority("CEO", "GENERAL_MANAGER")
+
                         .requestMatchers("/api/**").authenticated()
                 )
                 .cors()
