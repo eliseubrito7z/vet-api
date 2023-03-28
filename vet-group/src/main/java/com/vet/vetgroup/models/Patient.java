@@ -5,6 +5,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -33,8 +34,8 @@ public class Patient implements Serializable {
     @Column(nullable = false, updatable = false)
     private String sex;
 
-    @OneToOne(mappedBy = "patient")
-    private Service service;
+    @OneToMany(mappedBy = "patient")
+    private List<Service> service;
 
     public Long getId() {
         return id;

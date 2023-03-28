@@ -38,11 +38,11 @@ public class Service implements Serializable {
     @JoinColumn(name = "city_id")
     private City city;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "medic_id", referencedColumnName = "id")
     private Staff medic;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
     private Patient patient;
 

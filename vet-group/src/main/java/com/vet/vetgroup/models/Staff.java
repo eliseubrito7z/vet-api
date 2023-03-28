@@ -37,8 +37,8 @@ public class Staff implements Serializable {
     @Column(name = "work_load_completed", nullable = true)
     private Integer workLoadCompleted;
 
-    @OneToOne(mappedBy = "medic")
-    private Service service;
+    @OneToMany(mappedBy = "medic")
+    private List<Service> service;
 
     @OneToMany(mappedBy = "createdBy")
     private List<Report> report;
