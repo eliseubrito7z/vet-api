@@ -1,6 +1,7 @@
 package com.vet.vetgroup.controllers;
 
 import com.vet.vetgroup.dtos.requests.ServiceCreationDto;
+import com.vet.vetgroup.dtos.responses.ServicesLengthDto;
 import com.vet.vetgroup.dtos.updates.UpdateDescription;
 import com.vet.vetgroup.enums.PaymentStatus;
 import com.vet.vetgroup.enums.ServiceStatus;
@@ -61,6 +62,12 @@ public class ServiceController {
     ) {
         Service serviceModel = service.updateDescription(token, body.getDescription(), id);
         return ResponseEntity.ok().body(serviceModel);
+    }
+
+    @GetMapping(value = "/length", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Find services length", description = "Endpoint for get services length")
+    public ResponseEntity<ServicesLengthDto> findLength() {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getLengthOfServices());
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

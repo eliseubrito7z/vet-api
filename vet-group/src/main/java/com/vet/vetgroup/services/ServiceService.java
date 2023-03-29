@@ -2,6 +2,7 @@ package com.vet.vetgroup.services;
 
 
 import com.vet.vetgroup.dtos.requests.ServiceCreationDto;
+import com.vet.vetgroup.dtos.responses.ServicesLengthDto;
 import com.vet.vetgroup.enums.PaymentStatus;
 import com.vet.vetgroup.enums.ServiceStatus;
 import com.vet.vetgroup.models.City;
@@ -106,6 +107,14 @@ public class ServiceService {
          service.setDescription(description);
          update(service);
          return service;
+    }
+
+    public ServicesLengthDto getLengthOfServices() {
+        ServicesLengthDto dto = new ServicesLengthDto();
+
+        dto.setToday(repository.findLengthOfTodayServices());
+        dto.setTotal(repository.findLengthOfAllServices());
+        return dto;
     }
 
     public void update(Service service) {
