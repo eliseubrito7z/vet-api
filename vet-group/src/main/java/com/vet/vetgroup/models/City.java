@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -18,8 +19,8 @@ public class City implements Serializable {
     public String name;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "city")
-    private Service service;
+    @OneToMany(mappedBy = "city")
+    private List<Service> service;
 
     public Long getId() {
         return id;
@@ -37,11 +38,11 @@ public class City implements Serializable {
         this.name = name;
     }
 
-    public Service getService() {
+    public List<Service> getService() {
         return service;
     }
 
-    public void setService(Service service) {
+    public void setService(List<Service> service) {
         this.service = service;
     }
 

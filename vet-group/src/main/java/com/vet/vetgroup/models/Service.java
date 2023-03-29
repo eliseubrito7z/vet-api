@@ -34,7 +34,7 @@ public class Service implements Serializable {
     @Column(nullable = false, updatable = false)
     private Integer price;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
 
