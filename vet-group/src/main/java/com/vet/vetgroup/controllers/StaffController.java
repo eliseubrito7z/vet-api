@@ -2,6 +2,7 @@ package com.vet.vetgroup.controllers;
 
 import com.vet.vetgroup.dtos.requests.RoleHistoricCreationDto;
 import com.vet.vetgroup.dtos.requests.StaffCreationDto;
+import com.vet.vetgroup.dtos.responses.StaffLengthDto;
 import com.vet.vetgroup.dtos.updates.UpdateSalary;
 import com.vet.vetgroup.models.Staff;
 import com.vet.vetgroup.services.StaffService;
@@ -58,6 +59,11 @@ public class StaffController {
         return ResponseEntity.ok().body(staff);
     }
 
+    @GetMapping(value = "/length", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Get staff length", description = "Endpoint for get staff length")
+    public ResponseEntity<StaffLengthDto> findLength() {
+        return ResponseEntity.ok().body(service.getLengthOfStaff());
+    }
 
     @GetMapping(value = "/me", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Get personal data", description = "Endpoint for get the personal details using token")

@@ -2,6 +2,7 @@ package com.vet.vetgroup.services;
 
 import com.vet.vetgroup.dtos.requests.RoleHistoricCreationDto;
 import com.vet.vetgroup.dtos.requests.StaffCreationDto;
+import com.vet.vetgroup.dtos.responses.StaffLengthDto;
 import com.vet.vetgroup.dtos.updates.UpdateSalary;
 import com.vet.vetgroup.mappers.UserMapper;
 import com.vet.vetgroup.models.Role;
@@ -143,6 +144,17 @@ public class StaffService {
         return staff;
         //OBS: Returning staff to update instantly on cache of FE.
     }
+
+    public StaffLengthDto getLengthOfStaff() {
+        StaffLengthDto dto = new StaffLengthDto();
+
+        dto.setTotal(repository.findLengthOfAllStaff());
+        dto.setOnDuty(repository.findLengthOfOnDutyStaff());
+
+        return dto;
+    }
+
+
 
     public void deleteById(Long id) {
         repository.deleteById(id);
