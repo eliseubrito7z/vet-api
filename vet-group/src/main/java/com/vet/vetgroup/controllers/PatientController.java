@@ -29,7 +29,7 @@ public class PatientController {
 
     @GetMapping(value = "/length", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Get patients length", description = "Endpoint for get patients length")
-    public ResponseEntity<PatientLengthDto> getPatientsLength(@PathVariable Long id) {
+    public ResponseEntity<PatientLengthDto> getPatientsLength() {
         return ResponseEntity.status(HttpStatus.OK).body(service.getPatientsLength());
     }
 
