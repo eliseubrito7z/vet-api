@@ -37,6 +37,10 @@ public class CityService {
         return repository.save(city);
     }
 
+    public Integer getAllCitiesLength() {
+        return repository.findLengthOfAllCities();
+    }
+
     public void deleteById(Long id) {
         repository.deleteById(id);
     }

@@ -27,6 +27,12 @@ public class CityController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping(value = "/length", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Get cities length", description = "Endpoint for get cities length")
+    public ResponseEntity<Integer> getCitiesLength() {
+        return ResponseEntity.ok().body(service.getAllCitiesLength());
+    }
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Find all cities", description = "Endpoint for find all cities created")
     public ResponseEntity<List<City>> findAll() {
