@@ -1,6 +1,7 @@
 package com.vet.vetgroup.services;
 
 import com.vet.vetgroup.dtos.requests.PatientCreationDto;
+import com.vet.vetgroup.dtos.responses.PatientLengthDto;
 import com.vet.vetgroup.models.Patient;
 import com.vet.vetgroup.repositories.PatientRepository;
 import org.springframework.beans.BeanUtils;
@@ -36,6 +37,14 @@ public class PatientService {
         patientModel.setBirthDate(new Date(dto.getBirthDate()));
         repository.save(patientModel);
         return patientModel.getId();
+    }
+
+    public PatientLengthDto getPatientsLength() {
+        PatientLengthDto dto = new PatientLengthDto();
+
+        dto.setToday(repository.findLengthOfNewPatients());
+        dto.setTotal(repository.findLengthOfAllPatients());
+        return dto;
     }
 
     public void deleteById(Long id) {

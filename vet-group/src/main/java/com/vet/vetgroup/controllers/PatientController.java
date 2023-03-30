@@ -1,6 +1,7 @@
 package com.vet.vetgroup.controllers;
 
 import com.vet.vetgroup.dtos.requests.PatientCreationDto;
+import com.vet.vetgroup.dtos.responses.PatientLengthDto;
 import com.vet.vetgroup.models.Patient;
 import com.vet.vetgroup.services.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,6 +25,12 @@ public class PatientController {
     @Operation(summary = "Create patient", description = "Endpoint for create a new patient")
     public ResponseEntity<Long> create(@RequestBody @Valid PatientCreationDto dto) {
         return ResponseEntity.ok().body(service.insert(dto));
+    }
+
+    @GetMapping(value = "/length", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Get patients length", description = "Endpoint for get patients length")
+    public ResponseEntity<PatientLengthDto> getPatientsLength(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(service.getPatientsLength());
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
