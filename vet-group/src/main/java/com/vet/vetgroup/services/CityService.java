@@ -33,7 +33,7 @@ public class CityService {
 
     public City insert(CityCreationDto dto) {
         City city = new City();
-        city.setName(dto.getNameAndUF());
+        city.setName(dto.getNameAndUF().toUpperCase());
         return repository.save(city);
     }
 
