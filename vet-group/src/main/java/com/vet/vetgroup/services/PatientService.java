@@ -35,6 +35,7 @@ public class PatientService {
         BeanUtils.copyProperties(dto, patientModel);
         patientModel.setCreatedAt(new Date());
         patientModel.setBirthDate(new Date(dto.getBirthDate()));
+        patientModel.setOwner(dto.getOwner().trim());
         repository.save(patientModel);
         return patientModel.getId();
     }

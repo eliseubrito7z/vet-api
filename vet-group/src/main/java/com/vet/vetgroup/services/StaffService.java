@@ -67,6 +67,8 @@ public class StaffService {
         staffModel.setCreatedAt(new Date());
         staffModel.setRole(role);
         staffModel.setOnDuty(false);
+        staffModel.setFullName(dto.getFullName().trim());
+        staffModel.setEmail(dto.getEmail().trim());
 
         User user = userMapper.convertStaffDtoToUser(dto);
 

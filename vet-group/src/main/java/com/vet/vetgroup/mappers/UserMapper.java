@@ -31,7 +31,7 @@ public class UserMapper {
 
         user.setEmail(staffDto.getEmail());
         user.setFullName(staffDto.getFullName());
-        user.setPassword(passwordEncoder.encode(staffDto.getPassword()).substring("{pbkdf2}".length()));
+        user.setPassword(passwordEncoder.encode(staffDto.getPassword().trim()).substring("{pbkdf2}".length()));
         user.setEnabled(true);
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
