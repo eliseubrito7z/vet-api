@@ -36,6 +36,7 @@ public class PatientService {
         patientModel.setCreatedAt(new Date());
         patientModel.setBirthDate(new Date(dto.getBirthDate()));
         patientModel.setOwner(dto.getOwner().trim());
+        patientModel.setName(dto.getName().trim());
         repository.save(patientModel);
         return patientModel.getId();
     }
