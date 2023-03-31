@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -49,6 +50,13 @@ public class Staff implements Serializable {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
+    @OneToMany(mappedBy = "promoter")
+    private List<RoleHistoric> promoterHistoric = new ArrayList<>();
+
+    @OneToMany(mappedBy = "staff")
+    private List<RoleHistoric> roleHistoric = new ArrayList<>();
+
 
     public Long getId() {
         return id;
