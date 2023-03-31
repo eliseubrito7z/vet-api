@@ -146,6 +146,22 @@ public class Staff implements Serializable {
         this.role = role;
     }
 
+    public List<RoleHistoric> getPromoterHistoric() {
+        return promoterHistoric;
+    }
+
+    public List<RoleHistoric> getRoleHistoric() {
+        return roleHistoric;
+    }
+
+    public List<Report> getReportApprover() {
+        return reportApprover;
+    }
+
+    public void setReportApprover(List<Report> reportApprover) {
+        this.reportApprover = reportApprover;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
