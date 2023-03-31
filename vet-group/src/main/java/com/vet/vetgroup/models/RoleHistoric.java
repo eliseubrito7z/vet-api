@@ -1,5 +1,6 @@
 package com.vet.vetgroup.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -26,10 +27,12 @@ public class RoleHistoric  implements Serializable {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "promoted_by")
     private Staff promoter;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "staff_id")
     private Staff staff;
