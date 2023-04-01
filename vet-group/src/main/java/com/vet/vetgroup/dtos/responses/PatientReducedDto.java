@@ -1,4 +1,4 @@
-package com.vet.vetgroup.dtos.reduceds;
+package com.vet.vetgroup.dtos.responses;
 
 public class PatientReducedDto {
 

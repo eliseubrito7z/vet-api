@@ -1,7 +1,7 @@
 package com.vet.vetgroup.dtos.responses;
 
-import com.vet.vetgroup.dtos.reduceds.PatientReducedDto;
-import com.vet.vetgroup.dtos.reduceds.StaffReducedDto;
+import com.vet.vetgroup.dtos.responses.PatientReducedDto;
+import com.vet.vetgroup.dtos.responses.StaffReducedDto;
 import com.vet.vetgroup.models.City;
 
 import java.util.Date;
