@@ -1,10 +1,12 @@
 package com.vet.vetgroup.controllers;
 
 import com.vet.vetgroup.dtos.requests.ServiceCreationDto;
+import com.vet.vetgroup.dtos.responses.ServiceResponseDto;
 import com.vet.vetgroup.dtos.responses.ServicesLengthDto;
 import com.vet.vetgroup.dtos.updates.UpdateDescription;
 import com.vet.vetgroup.enums.PaymentStatus;
 import com.vet.vetgroup.enums.ServiceStatus;
+import com.vet.vetgroup.mappers.ServiceMapper;
 import com.vet.vetgroup.models.Service;
 import com.vet.vetgroup.services.ServiceService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,6 +27,9 @@ public class ServiceController {
     @Autowired
     private ServiceService service;
 
+    @Autowired
+    private ServiceMapper serviceMapper;
+
     @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Create a service", description = "Endpoint for create a service")
     public ResponseEntity<Long> create(@RequestBody @Valid ServiceCreationDto dto) {
@@ -33,35 +38,35 @@ public class ServiceController {
 
     @PatchMapping(value = "/{id}/update-status", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Update status", description = "Endpoint for update status of service")
-    public ResponseEntity<Service> updateStatus(
+    public ResponseEntity<ServiceResponseDto> updateStatus(
             @PathVariable Long id,
             @RequestParam(name = "status", required = true) ServiceStatus status,
             @RequestHeader(HttpHeaders.AUTHORIZATION) String token
     ) {
         Service serviceModel = service.updateStatus(token, status, id);
-        return ResponseEntity.ok().body(serviceModel);
+        return ResponseEntity.ok().body(serviceMapper.convertModelToDto(serviceModel));
     }
 
     @PatchMapping(value = "/{id}/update-payment", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Update status of payment", description = "Endpoint for update status payment of report")
-    public ResponseEntity<Service> updatePaymentStatus(
+    public ResponseEntity<ServiceResponseDto> updatePaymentStatus(
             @PathVariable Long id,
             @RequestParam(name = "payment-status", required = true) PaymentStatus status,
             @RequestHeader(HttpHeaders.AUTHORIZATION) String token
     ) {
         Service serviceModel = service.updatePaymentStatus(token, status, id);
-        return ResponseEntity.ok().body(serviceModel);
+        return ResponseEntity.ok().body(serviceMapper.convertModelToDto(serviceModel));
     }
 
     @PutMapping(value = "/{id}/update-description", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Update description", description = "Endpoint for update description of report")
-    public ResponseEntity<Service> updateDescription(
+    public ResponseEntity<ServiceResponseDto> updateDescription(
             @PathVariable Long id,
             @RequestBody @Valid UpdateDescription body,
             @RequestHeader(HttpHeaders.AUTHORIZATION) String token
     ) {
         Service serviceModel = service.updateDescription(token, body.getDescription(), id);
-        return ResponseEntity.ok().body(serviceModel);
+        return ResponseEntity.ok().body(serviceMapper.convertModelToDto(serviceModel));
     }
 
     @GetMapping(value = "/length", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -72,16 +77,16 @@ public class ServiceController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Find all services", description = "Endpoint for get all services")
-    public ResponseEntity<List<Service>> findAll() {
+    public ResponseEntity<List<ServiceResponseDto>> findAll() {
         List<Service> list = service.findAll();
-        return ResponseEntity.status(HttpStatus.OK).body(list);
+        return ResponseEntity.status(HttpStatus.OK).body(serviceMapper.convertListToDto(list));
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Find a services", description = "Endpoint for get a service by id")
-    public ResponseEntity<Service> findById(@PathVariable Long id) {
-        Service patient = service.findById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(patient);
+    public ResponseEntity<ServiceResponseDto> findById(@PathVariable Long id) {
+        Service serviceModel = service.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(serviceMapper.convertModelToDto(serviceModel));
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
