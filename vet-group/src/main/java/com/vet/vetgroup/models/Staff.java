@@ -1,6 +1,7 @@
 package com.vet.vetgroup.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.boot.context.properties.bind.DefaultValue;
@@ -44,6 +45,7 @@ public class Staff implements Serializable {
     @OneToMany(mappedBy = "createdBy")
     private List<Report> report;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "approver")
     private List<Report> reportApprover;
 
