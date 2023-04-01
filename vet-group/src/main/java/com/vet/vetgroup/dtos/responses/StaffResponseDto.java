@@ -14,6 +14,7 @@ public class StaffResponseDto {
     private Role role;
     private String fullName;
     private String email;
+    private String cpf;
     private String avatarUrl;
     private Integer baseSalary;
     private Boolean onDuty;
@@ -59,6 +60,14 @@ public class StaffResponseDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getAvatarUrl() {
