@@ -9,7 +9,6 @@ import java.util.List;
 public class StaffResponseDto {
 
     private Long id;
-    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date createdAt;
     private Role role;
     private String fullName;
