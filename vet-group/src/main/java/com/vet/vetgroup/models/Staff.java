@@ -164,6 +164,14 @@ public class Staff implements Serializable {
         this.reportApprover = reportApprover;
     }
 
+    public List<Service> getService() {
+        return service;
+    }
+
+    public void setService(List<Service> service) {
+        this.service = service;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

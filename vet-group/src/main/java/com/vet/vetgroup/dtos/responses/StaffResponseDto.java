@@ -2,6 +2,7 @@ package com.vet.vetgroup.dtos.responses;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vet.vetgroup.models.Role;
+import com.vet.vetgroup.models.Service;
 
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,7 @@ public class StaffResponseDto {
     private Integer weeklyWorkLoad;
     private Integer workLoadCompleted;
     private List<RoleHistoricResponseDto> roleHistoric;
+    private List<ServiceResponseDto> servicesList;
 
     public Long getId() {
         return id;
@@ -115,5 +117,13 @@ public class StaffResponseDto {
 
     public void setRoleHistoric(List<RoleHistoricResponseDto> roleHistoric) {
         this.roleHistoric = roleHistoric;
+    }
+
+    public List<ServiceResponseDto> getServicesList() {
+        return servicesList;
+    }
+
+    public void setServicesList(List<ServiceResponseDto> servicesList) {
+        this.servicesList = servicesList;
     }
 }

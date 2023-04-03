@@ -1,6 +1,7 @@
 package com.vet.vetgroup.mappers;
 
 import com.vet.vetgroup.dtos.responses.RoleHistoricResponseDto;
+import com.vet.vetgroup.dtos.responses.ServiceResponseDto;
 import com.vet.vetgroup.dtos.responses.StaffReducedDto;
 import com.vet.vetgroup.dtos.responses.StaffResponseDto;
 import com.vet.vetgroup.models.Role;
@@ -17,6 +18,9 @@ import java.util.List;
 @Service
 public class StaffMapper {
 
+    @Autowired
+    private PatientMapper patientMapper;
+
     public StaffReducedDto convertModelToReducedDto(Staff model) {
         StaffReducedDto dto = new StaffReducedDto();
         BeanUtils.copyProperties(model, dto);
@@ -29,6 +33,12 @@ public class StaffMapper {
         BeanUtils.copyProperties(model, dto);
 
         List<RoleHistoricResponseDto> roleHistoricDto = new ArrayList<>();
+        List<ServiceResponseDto> serviceDtoList = new ArrayList<>();
+
+        for (com.vet.vetgroup.models.Service service : model.getService()) {
+            ServiceResponseDto serviceDto = convertModelToDtoWithoutStaff(service);
+            serviceDtoList.add(serviceDto);
+        }
 
         for (RoleHistoric historic : model.getRoleHistoric()) {
             RoleHistoricResponseDto roleDto = new RoleHistoricResponseDto();
@@ -40,6 +50,8 @@ public class StaffMapper {
         }
 
         dto.setRoleHistoric(roleHistoricDto);
+        dto.setServicesList(serviceDtoList);
+
         return dto;
     }
 
@@ -51,5 +63,17 @@ public class StaffMapper {
         }
 
         return dtoList;
+    }
+
+    public ServiceResponseDto convertModelToDtoWithoutStaff(com.vet.vetgroup.models.Service model) {
+        ServiceResponseDto dto = new ServiceResponseDto();
+        BeanUtils.copyProperties(model, dto);
+
+        dto.setType(model.getType().toString());
+        dto.setPaymentStatus(model.getPaymentStatus().toString());
+        dto.setStatus(model.getStatus().toString());
+        dto.setPatient(patientMapper.convertModelToReducedDto(model.getPatient()));
+
+        return dto;
     }
 }
