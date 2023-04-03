@@ -1,5 +1,7 @@
 package com.vet.vetgroup.dtos.responses;
 
+import com.vet.vetgroup.enums.ReportTypes;
+
 import java.util.Date;
 
 public class ReportResponseDto {
@@ -7,9 +9,11 @@ public class ReportResponseDto {
     private String title;
     private String description;
     private Integer paymentValue;
-    private Integer type;
+    private ReportTypes type;
     private Date createdAt;
     private Boolean approved;
+    private StaffReducedDto createdBy;
+    private StaffReducedDto approver;
 
     public Long getId() {
         return id;
@@ -43,11 +47,11 @@ public class ReportResponseDto {
         this.paymentValue = paymentValue;
     }
 
-    public Integer getType() {
+    public ReportTypes getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(ReportTypes type) {
         this.type = type;
     }
 
@@ -65,5 +69,21 @@ public class ReportResponseDto {
 
     public void setApproved(Boolean approved) {
         this.approved = approved;
+    }
+
+    public StaffReducedDto getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(StaffReducedDto createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public StaffReducedDto getApprover() {
+        return approver;
+    }
+
+    public void setApprover(StaffReducedDto approver) {
+        this.approver = approver;
     }
 }
