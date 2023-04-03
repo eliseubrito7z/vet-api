@@ -35,7 +35,7 @@ public class Patient implements Serializable {
     private String sex;
 
     @OneToMany(mappedBy = "patient")
-    private List<Service> service;
+    private List<Service> services;
 
     public Long getId() {
         return id;
@@ -115,6 +115,14 @@ public class Patient implements Serializable {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 
     @Override

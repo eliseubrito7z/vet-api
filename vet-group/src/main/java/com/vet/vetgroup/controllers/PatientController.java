@@ -2,6 +2,9 @@ package com.vet.vetgroup.controllers;
 
 import com.vet.vetgroup.dtos.requests.PatientCreationDto;
 import com.vet.vetgroup.dtos.responses.PatientLengthDto;
+import com.vet.vetgroup.dtos.responses.PatientReducedDto;
+import com.vet.vetgroup.dtos.responses.PatientResponseDto;
+import com.vet.vetgroup.mappers.PatientMapper;
 import com.vet.vetgroup.models.Patient;
 import com.vet.vetgroup.services.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,6 +24,9 @@ public class PatientController {
     @Autowired
     private PatientService service;
 
+    @Autowired
+    private PatientMapper patientMapper;
+
     @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Create patient", description = "Endpoint for create a new patient")
     public ResponseEntity<Long> create(@RequestBody @Valid PatientCreationDto dto) {
@@ -35,16 +41,16 @@ public class PatientController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Find all patients", description = "Endpoint for get all patients")
-    public ResponseEntity<List<Patient>> findAll() {
+    public ResponseEntity<List<PatientReducedDto>> findAll() {
         List<Patient> list = service.findAll();
-        return ResponseEntity.status(HttpStatus.OK).body(list);
+        return ResponseEntity.status(HttpStatus.OK).body(patientMapper.convertModelListToDtoList(list));
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Find a patient by id", description = "Endpoint for get a patient by id")
-    public ResponseEntity<Patient> findById(@PathVariable Long id) {
+    public ResponseEntity<PatientResponseDto> findById(@PathVariable Long id) {
         Patient patient = service.findById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(patient);
+        return ResponseEntity.status(HttpStatus.OK).body(patientMapper.convertModelToDto(patient));
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

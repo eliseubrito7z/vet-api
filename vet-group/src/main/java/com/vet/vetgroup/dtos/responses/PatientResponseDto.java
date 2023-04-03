@@ -3,6 +3,7 @@ package com.vet.vetgroup.dtos.responses;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
+import java.util.List;
 
 public class PatientResponseDto {
 
@@ -17,6 +18,7 @@ public class PatientResponseDto {
     private String avatarUrl;
     private String kind;
     private String sex;
+    private List<ServiceResponseDto> services;
 
     public Long getId() {
         return id;
@@ -96,5 +98,13 @@ public class PatientResponseDto {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public List<ServiceResponseDto> getServices() {
+        return services;
+    }
+
+    public void setServices(List<ServiceResponseDto> services) {
+        this.services = services;
     }
 }
