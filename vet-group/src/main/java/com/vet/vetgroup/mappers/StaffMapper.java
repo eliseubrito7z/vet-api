@@ -1,9 +1,7 @@
 package com.vet.vetgroup.mappers;
 
-import com.vet.vetgroup.dtos.responses.RoleHistoricResponseDto;
-import com.vet.vetgroup.dtos.responses.ServiceResponseDto;
-import com.vet.vetgroup.dtos.responses.StaffReducedDto;
-import com.vet.vetgroup.dtos.responses.StaffResponseDto;
+import com.vet.vetgroup.dtos.responses.*;
+import com.vet.vetgroup.models.Patient;
 import com.vet.vetgroup.models.Role;
 import com.vet.vetgroup.models.RoleHistoric;
 import com.vet.vetgroup.models.Staff;
@@ -17,9 +15,6 @@ import java.util.List;
 
 @Service
 public class StaffMapper {
-
-    @Autowired
-    private PatientMapper patientMapper;
 
     public StaffReducedDto convertModelToReducedDto(Staff model) {
         StaffReducedDto dto = new StaffReducedDto();
@@ -72,8 +67,14 @@ public class StaffMapper {
         dto.setType(model.getType().toString());
         dto.setPaymentStatus(model.getPaymentStatus().toString());
         dto.setStatus(model.getStatus().toString());
-        dto.setPatient(patientMapper.convertModelToReducedDto(model.getPatient()));
+        dto.setPatient(convertModelToReducedDto(model.getPatient()));
 
+        return dto;
+    }
+
+    public PatientReducedDto convertModelToReducedDto(Patient model) {
+        PatientReducedDto dto = new PatientReducedDto();
+        BeanUtils.copyProperties(model, dto);
         return dto;
     }
 }
