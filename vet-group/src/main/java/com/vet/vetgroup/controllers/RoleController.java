@@ -23,7 +23,7 @@ public class RoleController {
 
     @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Create role", description = "Endpoint for create a new role")
-    public ResponseEntity<Role> create(@RequestBody @Valid RoleCreationDto dto) {
+    public ResponseEntity<Long> create(@RequestBody @Valid RoleCreationDto dto) {
         return ResponseEntity.ok().body(service.insert(dto));
     }
 

@@ -42,12 +42,13 @@ public class RoleService {
         return role.get();
     }
 
-    public Role insert(RoleCreationDto dto) {
+    public Long insert(RoleCreationDto dto) {
         Role role = new Role();
         role.setDescription(dto.getDescription());
         role.setPrivileges(dto.getPrivileges());
 
-        return repository.save(role);
+        repository.save(role);
+        return role.getId();
     }
 
     public Role addNewPrivilege(NewPrivilegeDto dto, Long id) {

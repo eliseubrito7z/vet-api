@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS `tb_services` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `created_at` datetime(6) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
+  `description` TEXT NULL DEFAULT NULL COLLATE 'utf8mb4_0900_ai_ci',
   `payment_status` int NOT NULL,
   `price` int NOT NULL,
   `reason` varchar(255) NOT NULL,

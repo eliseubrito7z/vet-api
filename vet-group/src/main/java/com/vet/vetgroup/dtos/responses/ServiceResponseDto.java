@@ -11,6 +11,7 @@ public class ServiceResponseDto {
     private Long id;
     private Date createdAt;
     private String reason;
+    private String description;
     private Date serviceDate;
     private String type;
     private String status;
@@ -42,6 +43,14 @@ public class ServiceResponseDto {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getServiceDate() {

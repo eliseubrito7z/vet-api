@@ -1,11 +1,17 @@
 package com.vet.vetgroup.dtos.responses;
 
+import java.util.Date;
+
 public class PatientReducedDto {
 
     private Long id;
     private String name;
     private String kind;
     private String owner;
+    private String ownerContact;
+    private String breed;
+    private Date birthDate;
+    private String sex;
 
     public Long getId() {
         return id;
@@ -37,5 +43,37 @@ public class PatientReducedDto {
 
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public String getOwnerContact() {
+        return ownerContact;
+    }
+
+    public void setOwnerContact(String ownerContact) {
+        this.ownerContact = ownerContact;
+    }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }
