@@ -6,7 +6,6 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -26,7 +25,7 @@ public class Report implements Serializable {
     @Column(nullable = false, unique = false)
     private Integer type;
     @Column(name = "created_at", nullable = false, updatable = false)
-    private Date createdAt;
+    private LocalDateTime createdAt;
     @Column(nullable = true, unique = false)
     private Boolean approved;
 
@@ -80,11 +79,11 @@ public class Report implements Serializable {
         }
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 

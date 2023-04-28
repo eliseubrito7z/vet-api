@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +17,7 @@ public class Patient implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "created_at", nullable = false, updatable = false)
-    private Date createdAt;
+    private LocalDateTime createdAt;
     @Column(nullable = false, updatable = true)
     private String owner;
     @Column(nullable = false, updatable = false)
@@ -45,11 +46,11 @@ public class Patient implements Serializable {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 

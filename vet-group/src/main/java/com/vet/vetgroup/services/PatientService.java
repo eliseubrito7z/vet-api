@@ -8,6 +8,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +37,7 @@ public class PatientService {
     public Long insert(PatientCreationDto dto) {
         Patient patientModel = new Patient();
         BeanUtils.copyProperties(dto, patientModel);
-        patientModel.setCreatedAt(new Date());
+        patientModel.setCreatedAt(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
         patientModel.setBirthDate(new Date(dto.getBirthDate()));
         patientModel.setOwner(dto.getOwner().trim());
         patientModel.setName(dto.getName().trim());

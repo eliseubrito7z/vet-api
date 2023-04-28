@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -18,13 +19,13 @@ public class Service implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "created_at", nullable = false, updatable = false)
-    private Date createdAt;
+    private LocalDateTime createdAt;
     @Column(nullable = false, updatable = false)
     private String reason;
     @Column(nullable = true)
     private String description;
     @Column(name = "service_date", nullable = false, updatable = false)
-    private Date serviceDate;
+    private LocalDateTime serviceDate;
     @Column(nullable = false, updatable = false)
     private Integer type;
     @Column(nullable = false)
@@ -55,11 +56,11 @@ public class Service implements Serializable {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -79,11 +80,11 @@ public class Service implements Serializable {
         this.description = description;
     }
 
-    public Date getServiceDate() {
+    public LocalDateTime getServiceDate() {
         return serviceDate;
     }
 
-    public void setServiceDate(Date serviceDate) {
+    public void setServiceDate(LocalDateTime serviceDate) {
         this.serviceDate = serviceDate;
     }
 

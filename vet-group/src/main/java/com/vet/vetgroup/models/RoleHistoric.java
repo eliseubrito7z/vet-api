@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -17,7 +18,7 @@ public class RoleHistoric  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = false, nullable = false, updatable = false)
-    private Date startedIn;
+    private LocalDateTime startedIn;
     @Column(unique = false, nullable = false, updatable = false)
     private Integer baseSalary;
     @Column(unique = false, nullable = false, updatable = false)
@@ -45,11 +46,11 @@ public class RoleHistoric  implements Serializable {
         this.id = id;
     }
 
-    public Date getStartedIn() {
+    public LocalDateTime getStartedIn() {
         return startedIn;
     }
 
-    public void setStartedIn(Date startedIn) {
+    public void setStartedIn(LocalDateTime startedIn) {
         this.startedIn = startedIn;
     }
 

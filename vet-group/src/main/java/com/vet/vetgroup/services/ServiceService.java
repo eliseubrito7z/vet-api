@@ -13,6 +13,8 @@ import com.vet.vetgroup.repositories.ServiceRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -52,10 +54,10 @@ public class ServiceService {
         BeanUtils.copyProperties(dto, serviceModel);
 
         if (serviceModel.getStatus() != ServiceStatus.SCHEDULED) {
-            serviceModel.setServiceDate(new Date());
+            serviceModel.setServiceDate(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
         }
 
-        serviceModel.setCreatedAt(new Date());
+        serviceModel.setCreatedAt(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
         serviceModel.setType(dto.getType());
         serviceModel.setPaymentStatus(dto.getPaymentStatus());
         serviceModel.setStatus(dto.getStatus());

@@ -1,15 +1,11 @@
 package com.vet.vetgroup.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.boot.context.properties.bind.DefaultValue;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,7 +17,7 @@ public class Staff implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "created_at", nullable = false, updatable = false)
-    private Date createdAt;
+    private LocalDateTime createdAt;
     @Column(name = "full_name", nullable = false)
     private String fullName;
     @Column(nullable = false, unique = true)
@@ -68,11 +64,11 @@ public class Staff implements Serializable {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 

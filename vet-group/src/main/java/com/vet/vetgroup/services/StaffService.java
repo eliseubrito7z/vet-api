@@ -15,6 +15,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -64,7 +66,7 @@ public class StaffService {
         Staff staffModel = new Staff();
         Role role = roleService.findByDescription(dto.getRole());
         BeanUtils.copyProperties(dto, staffModel);
-        staffModel.setCreatedAt(new Date());
+        staffModel.setCreatedAt(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
         staffModel.setRole(role);
         staffModel.setOnDuty(false);
         staffModel.setFullName(dto.getFullName().trim());
@@ -113,7 +115,7 @@ public class StaffService {
         roleHistoric.setRole(staff.getRole());
         roleHistoric.setStaff(staff);
         roleHistoric.setPromoter(promotedBy);
-        roleHistoric.setStartedIn(new Date());
+        roleHistoric.setStartedIn(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
 
         staff.setBaseSalary(updateSalaryDto.getBaseSalary());
 
@@ -137,7 +139,7 @@ public class StaffService {
         roleHistoric.setRole(role);
         roleHistoric.setStaff(staff);
         roleHistoric.setPromoter(promotedBy);
-        roleHistoric.setStartedIn(new Date());
+        roleHistoric.setStartedIn(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
 
         staff.setRole(role);
 
