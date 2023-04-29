@@ -3,12 +3,12 @@ package com.vet.vetgroup.dtos.responses;
 import com.vet.vetgroup.models.Role;
 import com.vet.vetgroup.models.Staff;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class RoleHistoricResponseDto {
 
     private Long id;
-    private Date startedIn;
+    private LocalDateTime startedIn;
     private Integer baseSalary;
     private Integer weeklyWorkLoad;
     private Role role;
@@ -22,11 +22,11 @@ public class RoleHistoricResponseDto {
         this.id = id;
     }
 
-    public Date getStartedIn() {
+    public LocalDateTime getStartedIn() {
         return startedIn;
     }
 
-    public void setStartedIn(Date startedIn) {
+    public void setStartedIn(LocalDateTime startedIn) {
         this.startedIn = startedIn;
     }
 

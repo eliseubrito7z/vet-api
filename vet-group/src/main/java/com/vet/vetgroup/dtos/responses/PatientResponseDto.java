@@ -2,6 +2,7 @@ package com.vet.vetgroup.dtos.responses;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -9,12 +10,12 @@ public class PatientResponseDto {
 
     private Long id;
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date createdAt;
+    private LocalDateTime createdAt;
     private String owner;
     private String name;
     private String ownerContact;
     private String breed;
-    private Date birthDate;
+    private LocalDateTime birthDate;
     private String avatarUrl;
     private String kind;
     private String sex;
@@ -28,11 +29,11 @@ public class PatientResponseDto {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -68,11 +69,11 @@ public class PatientResponseDto {
         this.breed = breed;
     }
 
-    public Date getBirthDate() {
+    public LocalDateTime getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDateTime birthDate) {
         this.birthDate = birthDate;
     }
 

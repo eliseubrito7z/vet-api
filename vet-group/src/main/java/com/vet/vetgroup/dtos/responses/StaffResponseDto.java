@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vet.vetgroup.models.Role;
 import com.vet.vetgroup.models.Service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class StaffResponseDto {
 
     private Long id;
-    private Date createdAt;
+    private LocalDateTime createdAt;
     private Role role;
     private String fullName;
     private String email;
@@ -31,11 +31,11 @@ public class StaffResponseDto {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 

@@ -2,6 +2,7 @@ package com.vet.vetgroup.dtos.responses;
 
 import com.vet.vetgroup.enums.ReportTypes;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class ReportResponseDto {
@@ -10,7 +11,7 @@ public class ReportResponseDto {
     private String description;
     private Integer paymentValue;
     private ReportTypes type;
-    private Date createdAt;
+    private LocalDateTime createdAt;
     private Boolean approved;
     private StaffReducedDto createdBy;
     private StaffReducedDto approver;
@@ -55,11 +56,11 @@ public class ReportResponseDto {
         this.type = type;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 

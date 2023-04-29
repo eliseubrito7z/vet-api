@@ -4,15 +4,16 @@ import com.vet.vetgroup.dtos.responses.PatientReducedDto;
 import com.vet.vetgroup.dtos.responses.StaffReducedDto;
 import com.vet.vetgroup.models.City;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class ServiceResponseDto {
 
     private Long id;
-    private Date createdAt;
+    private LocalDateTime createdAt;
     private String reason;
     private String description;
-    private Date serviceDate;
+    private LocalDateTime serviceDate;
     private String type;
     private String status;
     private String paymentStatus;
@@ -29,11 +30,11 @@ public class ServiceResponseDto {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -53,11 +54,11 @@ public class ServiceResponseDto {
         this.description = description;
     }
 
-    public Date getServiceDate() {
+    public LocalDateTime getServiceDate() {
         return serviceDate;
     }
 
-    public void setServiceDate(Date serviceDate) {
+    public void setServiceDate(LocalDateTime serviceDate) {
         this.serviceDate = serviceDate;
     }
 

@@ -1,5 +1,6 @@
 package com.vet.vetgroup.dtos.responses;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class PatientReducedDto {
@@ -10,7 +11,7 @@ public class PatientReducedDto {
     private String owner;
     private String ownerContact;
     private String breed;
-    private Date birthDate;
+    private LocalDateTime birthDate;
     private String sex;
 
     public Long getId() {
@@ -61,11 +62,11 @@ public class PatientReducedDto {
         this.breed = breed;
     }
 
-    public Date getBirthDate() {
+    public LocalDateTime getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDateTime birthDate) {
         this.birthDate = birthDate;
     }
 
